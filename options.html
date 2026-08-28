@@ -1,89 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Extensity Options</title>
-<link rel="stylesheet" type="text/css" href="styles/options.css" />
-<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css" />
-<script type="text/javascript" src="js/libs/underscore-min.js"></script>
-<script type="text/javascript" src="js/libs/knockout-3.5.1.js"></script>
-<script type="text/javascript" src="js/libs/knockout-secure-binding.min.js"></script>
-<script type="text/javascript" src="js/engine.js"></script>
-<script type="text/javascript" src="js/options.js"></script>
-</head>
-<body>
-<section id="header">
-  <div class="tabs">
-  	<h1><img src="images/icon48.png" /> Extensity Options</h1>
-  	<div id="menu">
-    	<a href="/options.html" class="selected">Options</a>
-    	<a href="/profiles.html">Profiles</a>
-  	</div>
-  </div>
-  <div class="help">
-    <!-- <i class="fa fa-close right"></i> -->
-    <i class="fa fa-warning"></i> <strong><a href="http://sergiokas.github.io/Extensity/help.html" target="_blank">Support Extensity!</a></strong><br/><br/>If you like Extensity and its new Profiles feature, <a href="http://sergiokas.github.io/Extensity/help.html" target="_blank">please consider helping out with its development <i class="fa fa-arrow-circle-right"></i></a>
-  </div>
-</section>
-<div class="clear"></div>
-<section id="content">
-	<fieldset id="options">
-    <legend>Layout</legend>
-    <div class="field">
-      <input type="checkbox" name="showHeader" id="showHeader" data-sbind="checked: options.showHeader" />
-      <label for="showHeader">
-        Show header at the top
-      </label>
-    </div>
-    <div class="field">
-      <input type="checkbox" name="searchBox" id="searchBox" data-sbind="checked: options.searchBox"/>
-      <label for="searchBox">
-        Show search box
-      </label>
-    </div>
-    <legend>Apps &amp; Extensions</legend>
-		<div class="field">
-			<input type="checkbox" name="groupApps" id="groupApps" data-sbind="checked: options.groupApps" />
-			<label for="groupApps">
-				Group Apps and Extensions
-			</label>
-		</div>
-		<div class="field">
-			<input type="checkbox" name="appsFirst" id="appsFirst" data-sbind="checked: options.appsFirst"/>
-			<label for="appsFirst">
-				Show Apps first when grouped
-			</label>
-		</div>
-    <div class="field">
-      <input type="checkbox" name="appsFirst" id="enabledFirst" data-sbind="checked: options.enabledFirst"/>
-      <label for="enabledFirst">
-        Show enabled Extensions at the top
-      </label>
-    </div>
-    <div class="field">
-      <input type="checkbox" name="showOptions" id="showOptions" data-sbind="checked: options.showOptions"/>
-      <label for="showOptions">
-        Show options icon for each item
-      </label>
-    </div>
-    <legend>Profiles &amp; Lists</legend>
-    <div class="field">
-      <input type="checkbox" name="showReserved" id="showReserved" data-sbind="checked: options.showReserved"/>
-      <label for="showReserved">
-        Show "Favorites" and "Always On" profiles in the list
-      </label>
-    </div>
-    <div class="field">
-      <input type="checkbox" name="keepAlwaysOn" id="keepAlwaysOn" data-sbind="checked: options.keepAlwaysOn"/>
-      <label for="keepAlwaysOn">
-        Keep "Always On" extensions enabled when switching everything off
-      </label>
-    </div>
-		<div class="field">
-			<button id="save" data-sbind="click: save">Save</button>&nbsp;
-			<a href="#" id="close" data-sbind="click: close">Close</a>
-			<span id="save-result" class="hidden">| Saved!</span>
-		</div>
-	</fieldset>
-</section>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Options | Extensity+</title>
+    <meta name="color-scheme" content="light dark" />
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/options/main.tsx"></script>
+  </body>
 </html>

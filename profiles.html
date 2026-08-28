@@ -1,101 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Extensity Profiles</title>
-<link rel="stylesheet" type="text/css" href="styles/options.css" />
-<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css" />
-<script type="text/javascript" src="js/libs/underscore-min.js"></script>
-<script type="text/javascript" src="js/libs/underscore.string.min.js"></script>
-<script type="text/javascript" src="js/libs/knockout-3.5.1.js"></script>
-<script type="text/javascript" src="js/libs/knockout-secure-binding.min.js"></script>
-<script type="text/javascript" src="js/engine.js"></script>
-<script type="text/javascript" src="js/profiles.js"></script>
-</head>
-<body>
-<section id="header">
-  <div class="tabs">
-    <h1><img src="images/icon48.png" /> Extensity Options</h1>
-    <div id="menu">
-      <a href="/options.html">Options</a>
-      <a href="/profiles.html" class="selected">Profiles</a>
-    </div>
-  </div>
-  <div class="help">
-    <!-- <i class="fa fa-close right"></i> -->
-    <i class="fa fa-warning"></i> <strong><a href="http://sergiokas.github.io/Extensity/help.html" target="_blank">Support Extensity!</a></strong><br/><br/>If you like Extensity and its new Profiles feature, <a href="http://sergiokas.github.io/Extensity/help.html" target="_blank">please consider helping out with its development <i class="fa fa-arrow-circle-right"></i></a>
-  </div>
-</section>
-<div class="clear">
-<div id="content">
-  <div class="instructions">
-    <p class="info">
-      <i class="fa fa-info-circle"></i><strong> How Profiles Work:</strong>
-      <br/><br/>When activating a profile, <strong>selected extensions will be enabled, and all the rest will be disabled.</strong>
-      <br/><br/>You can create as many profiles as you want. Try to put descriptive names such as "Browsing", "Shopping", "Work", etc.
-      <br/><br/><i class="fa fa-lightbulb-o"></i> <strong>Always On</strong>: Extensions that should be always enabled when switching to different profiles. You can still manually disable each extension when needed.
-      <br/><br/><i class="fa fa-star"></i> <strong>Favorites</strong>: Frequently used Extensions that will show up at the top of the list.
-    </p>
-    <div class="clear"></div>
-  </div>
-
-  <fieldset id="profiles">
-
-    <div class="sidebar">
-      <p>
-        <form data-sbind="submit: add">
-          <input type="text" id="name" placeholder="New Profile Name" data-sbind="value: add_name" /><button class="add" data-sbind="click: add"><i class="fa fa-plus-circle"></i></button>
-        </form>
-      </p>
-      <p>
-        <ul class="items">
-          <li data-sbind="click: selectAlwaysOn, css:{active: '__always_on'==current_name()}">
-            <i class="fa fa-lightbulb-o"></i>&nbsp;
-            <a href="#">Always On</a>
-          </li>
-          <li data-sbind="click: selectFavorites, css:{active: '__favorites'==current_name()}">
-            <i class="fa fa-star"></i>&nbsp;
-            <a href="#">Favorites</a>
-          </li>
-        </ul>
-      </p>
-      <p>
-        <ul class="items" data-sbind="foreach: profiles.items">
-          <li data-sbind="visible: !reserved(), click: $parent.select, css:{active: name()==$parent.current_name()}">
-            <i class="fa fa-trash-o" data-sbind="click:$parent.remove"></i>&nbsp;
-            <a data-sbind="text: short_name"></a>
-          </li>
-        </ul>
-      </p>
-      <hr />
-      <p><small><em>Note: no changes will be applied until you click on the "Save" button.</em></small></p>
-      <button id="save" data-sbind="click: save">Save</button>&nbsp;
-      <a href="#" id="close" data-sbind="click: close">Close</a>
-      <span id="save-result" class="hidden">| Saved!</span>
-      <p class="quota-error" data-sbind="visible: profiles.localProfiles">
-        <i class="fa fa-warning"></i> You have too many Extensions or Profiles to sync with Google. <b>Your Profiles are still saved, but only for this browser</b>.
-      </p>
-
-    </div>
-
-
-    <div class="extensions" data-sbind="if: editable">
-      <p class="toggle">
-        <a href="#" data-sbind="click: toggleAll">All</a> |
-        <a href="#" data-sbind="click: toggleNone">None</a>
-      </p>
-      <ul data-sbind="foreach: ext.extensions">
-        <li>
-          <label data-sbind="attr:{for:id}">
-            <input type="checkbox" data-sbind="value: id, attr:{id: id, name:id}, checked: $parent.current_profile().items" />
-            <img data-sbind="attr:{src: icon}" width="16px" height="16px" />
-            <span data-sbind="text: short_name"></span>
-            <i class="fa fa-flask" title="Development" alt="Development" data-sbind="visible: is_development"></i>
-          </label>
-        </li>
-      </ul>
-    </div>
-
-  </fieldset>
-</div>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Profiles | Extensity+</title>
+    <meta name="color-scheme" content="light dark" />
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/profiles/main.tsx"></script>
+  </body>
 </html>
