@@ -1,3 +1,5 @@
+import type { Language } from "./i18n";
+
 export type ItemKind = "extension" | "app";
 
 /** A single installed extension or app, normalized from chrome.management. */
@@ -43,17 +45,20 @@ export interface ExtendedOptions {
   showExtensionOptions: boolean;
   keepAlwaysOnWhenSwitchingOff: boolean;
   showReservedProfiles: boolean;
-  theme: "system" | "light" | "dark";
+  theme: "system" | "light" | "dark" | "youtube" | "discord" | "matrix";
+  language?: Language;
 }
 
 export const DEFAULT_OPTIONS: ExtendedOptions = {
   showHeader: true,
-  groupApps: true,
+  groupApps: false,
   appsFirst: false,
-  enabledFirst: false,
+  enabledFirst: true,
   searchBox: true,
   showExtensionOptions: true,
   keepAlwaysOnWhenSwitchingOff: false,
   showReservedProfiles: false,
   theme: "system",
+  language: undefined,
 };
+

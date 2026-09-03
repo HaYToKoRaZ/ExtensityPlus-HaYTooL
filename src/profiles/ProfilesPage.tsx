@@ -6,15 +6,23 @@ import { useManagedItems } from "@/hooks/useManagedItems";
 import { useOptions } from "@/hooks/useOptions";
 import { useProfiles } from "@/hooks/useProfiles";
 import { useTheme } from "@/hooks/useTheme";
-import { RESERVED_LABELS, RESERVED_PROFILE, isReserved } from "@/lib/types";
+import { useTranslation } from "@/hooks/useTranslation";
+import { RESERVED_PROFILE, isReserved } from "@/lib/types";
 
 export function ProfilesPage() {
   const { items, loaded } = useManagedItems();
   const { options } = useOptions();
   const { profiles, find, create, upsert, remove } = useProfiles();
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<string | undefined>(undefined);
   const [newName, setNewName] = useState("");
   useTheme(options.theme);
+
+  const getProfileLabel = (name: string) => {
+    if (name === RESERVED_PROFILE.ALWAYS_ON) return t("alwaysOn");
+    if (name === RESERVED_PROFILE.FAVORITES) return t("favorites");
+    return name;
+  };
 
   const extensions = useMemo(
     () => items.filter((i) => i.kind === "extension"),
@@ -53,7 +61,8 @@ export function ProfilesPage() {
   const selectNone = () => selected && upsert(selected, []);
 
   const handleDelete = (name: string) => {
-    if (!confirm(`Remove the profile "${RESERVED_LABELS[name] ?? name}"? This can't be undone.`)) {
+    const display = getProfileLabel(name);
+    if (!confirm(`"${display}" ${t("deleteProfileConfirm")}`)) {
       return;
     }
     remove(name);
@@ -65,11 +74,11 @@ export function ProfilesPage() {
       <div className="rounded-lg border border-line bg-white shadow-panel dark:border-graphite-line dark:bg-graphite">
         <div className="border-b border-line px-5 py-3 dark:border-graphite-line">
           <p className="text-[12.5px] leading-relaxed text-ash-500 dark:text-ash-400">
-            Switching to a profile enables exactly the extensions you've selected and disables
-            the rest. <span className="font-medium text-ash-700 dark:text-ash-200">Always On</span>{" "}
-            items stay enabled across every profile switch;{" "}
-            <span className="font-medium text-ash-700 dark:text-ash-200">Favorites</span> pin
-            items to the top of the popup.
+            {t("profilesDescriptionPart1")}{" "}
+            <span className="font-medium text-ash-700 dark:text-ash-200">{t("alwaysOn")}</span>{" "}
+            {t("profilesDescriptionPart2")}{" "}
+            <span className="font-medium text-ash-700 dark:text-ash-200">{t("favorites")}</span>{" "}
+            {t("profilesDescriptionPart3")}
           </p>
         </div>
 
@@ -79,13 +88,13 @@ export function ProfilesPage() {
             <ul className="mb-2 space-y-0.5">
               <ReservedRow
                 icon={Lightbulb}
-                label="Always On"
+                label={t("alwaysOn")}
                 active={selected === RESERVED_PROFILE.ALWAYS_ON}
                 onClick={() => selectReserved(RESERVED_PROFILE.ALWAYS_ON)}
               />
               <ReservedRow
                 icon={Star}
-                label="Favorites"
+                label={t("favorites")}
                 active={selected === RESERVED_PROFILE.FAVORITES}
                 onClick={() => selectReserved(RESERVED_PROFILE.FAVORITES)}
               />
@@ -116,7 +125,8 @@ export function ProfilesPage() {
                     </button>
                     <button
                       type="button"
-                      aria-label={`Delete ${p.name}`}
+                      aria-label={`${t("deleteProfile")}: ${p.name}`}
+                      title={`${t("deleteProfile")}: ${p.name}`}
                       onClick={() => handleDelete(p.name)}
                       className="mr-1 rounded-sm p-1 text-ash-300 opacity-0 transition-opacity hover:text-warn group-hover:opacity-100"
                     >
@@ -131,13 +141,14 @@ export function ProfilesPage() {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleCreate()}
-                placeholder="New profile name"
+                placeholder={t("newProfilePlaceholder")}
                 className="min-w-0 flex-1 rounded-sm border border-line bg-transparent px-2 py-1.5 text-[12.5px] outline-none focus:border-signal dark:border-graphite-line"
               />
               <button
                 type="button"
                 onClick={handleCreate}
-                aria-label="Create profile"
+                aria-label={t("createProfile")}
+                title={t("createProfile")}
                 className="rounded-sm bg-signal p-1.5 text-white transition-opacity hover:opacity-90"
               >
                 <Plus className="h-3.5 w-3.5" />
@@ -149,13 +160,13 @@ export function ProfilesPage() {
           <div className="p-4">
             {!selected ? (
               <p className="py-10 text-center text-[13px] text-ash-400">
-                Select or create a profile to edit which extensions it includes.
+                {t("noProfileSelected")}
               </p>
             ) : (
               <>
                 <div className="mb-3 flex items-center justify-between">
                   <h3 className="font-display text-[14px] font-semibold">
-                    {RESERVED_LABELS[selected] ?? selected}
+                    {getProfileLabel(selected)}
                   </h3>
                   <div className="flex gap-1.5">
                     <button
@@ -163,20 +174,20 @@ export function ProfilesPage() {
                       onClick={selectAll}
                       className="rounded-sm border border-line px-2 py-1 text-[11.5px] text-ash-600 hover:bg-ash-100 dark:border-graphite-line dark:text-ash-300 dark:hover:bg-graphite-soft"
                     >
-                      Select all
+                      {t("selectAll")}
                     </button>
                     <button
                       type="button"
                       onClick={selectNone}
                       className="rounded-sm border border-line px-2 py-1 text-[11.5px] text-ash-600 hover:bg-ash-100 dark:border-graphite-line dark:text-ash-300 dark:hover:bg-graphite-soft"
                     >
-                      Select none
+                      {t("selectNone")}
                     </button>
                   </div>
                 </div>
 
                 {!loaded ? (
-                  <p className="text-[12.5px] text-ash-400">Loading extensions…</p>
+                  <p className="text-[12.5px] text-ash-400">{t("loadingExtensions")}</p>
                 ) : (
                   <ul className="max-h-[380px] space-y-0.5 overflow-y-auto pr-1">
                     {extensions.map((item) => (
@@ -190,7 +201,7 @@ export function ProfilesPage() {
                           size="sm"
                           checked={currentSet.has(item.id)}
                           onChange={() => toggleMember(item.id)}
-                          label={`Include ${item.name} in ${selected}`}
+                          label={`${item.name} - ${getProfileLabel(selected)}`}
                         />
                       </li>
                     ))}

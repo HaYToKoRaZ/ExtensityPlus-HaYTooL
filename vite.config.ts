@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"),
+      "@": resolve(import.meta.dirname, "src"),
     },
   },
   build: {
@@ -28,10 +28,10 @@ export default defineConfig({
     modulePreload: false,
     rollupOptions: {
       input: {
-        index: resolve(__dirname, "index.html"),
-        options: resolve(__dirname, "options.html"),
-        profiles: resolve(__dirname, "profiles.html"),
-        background: resolve(__dirname, "src/background/service-worker.ts"),
+        index: resolve(import.meta.dirname, "index.html"),
+        options: resolve(import.meta.dirname, "options.html"),
+        profiles: resolve(import.meta.dirname, "profiles.html"),
+        background: resolve(import.meta.dirname, "src/background/service-worker.ts"),
       },
       output: {
         // Keep the service worker path stable & unhashed so it matches manifest.json.

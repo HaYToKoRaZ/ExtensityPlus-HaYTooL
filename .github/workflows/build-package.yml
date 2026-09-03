@@ -1,0 +1,65 @@
+name: Build & Package Extension
+
+on:
+  push:
+    branches:
+      - ExtensityPlus-HaYTooL
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Extract Version from manifest.json
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./manifest.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected Extension Version: $VERSION"
+
+      - name: Build Extension
+        run: npm run build
+
+      - name: Create WebStore ZIP Package
+        run: |
+          VERSION="${{ steps.get_version.outputs.VERSION }}"
+          ZIP_NAME="ExtensityPlus-HaYTooL-v${VERSION}-WebStore.zip"
+          cd dist
+          zip -r -9 "../${ZIP_NAME}" .
+          cd ..
+          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
+        id: create_zip
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.create_zip.outputs.ZIP_NAME }}
+          path: ${{ steps.create_zip.outputs.ZIP_NAME }}
+          retention-days: 90
+
+      - name: Create or Update GitHub Release (Optional Tag Release)
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+        with:
+          files: ${{ steps.create_zip.outputs.ZIP_NAME }}
+          name: "Extensity+ HaYTooL v${{ steps.get_version.outputs.VERSION }}"
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

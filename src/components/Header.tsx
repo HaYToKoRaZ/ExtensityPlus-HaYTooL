@@ -1,5 +1,6 @@
 import { Cog, Puzzle, UserRound, Zap } from "lucide-react";
 import { APP_NAME } from "@/lib/branding";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface HeaderProps {
   tripped: boolean;
@@ -16,24 +17,26 @@ export function Header({
   onOpenProfiles,
   onOpenChromeExtensions,
 }: HeaderProps) {
+  const { t } = useTranslation();
+
   return (
     <header className="flex items-center gap-2 border-b border-line px-3 py-2.5 dark:border-graphite-line">
-      <img src="/images/icon48.png" alt="" width={18} height={18} className="rounded-[4px]" />
+      <img src="/images/icon48.png" alt="" width={20} height={20} className="rounded-full shadow-sm" />
       <h1 className="font-display text-[14px] font-semibold tracking-tight text-ash-900 dark:text-white">
         {APP_NAME}
       </h1>
 
       <div className="ml-auto flex items-center gap-0.5">
-        <IconLink label="Options" onClick={onOpenOptions} icon={Cog} />
-        <IconLink label="Profiles" onClick={onOpenProfiles} icon={UserRound} />
-        <IconLink label="Chrome Extensions" onClick={onOpenChromeExtensions} icon={Puzzle} />
+        <IconLink label={t("options")} onClick={onOpenOptions} icon={Cog} />
+        <IconLink label={t("profiles")} onClick={onOpenProfiles} icon={UserRound} />
+        <IconLink label={t("chromeExtensions")} onClick={onOpenChromeExtensions} icon={Puzzle} />
 
         {/* The signature control: a breaker-style master switch, not a menu item. */}
         <button
           type="button"
           onClick={onFlip}
           aria-pressed={tripped}
-          title={tripped ? "Restore extensions" : "Switch all extensions off"}
+          title={tripped ? t("restoreExtensions") : t("turnAllOff")}
           className={`
             ml-1 inline-flex items-center gap-1 rounded-pill border px-2 py-1 text-[11px] font-semibold
             transition-colors duration-150

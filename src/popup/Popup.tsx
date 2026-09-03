@@ -4,6 +4,7 @@ import { useOptions } from "@/hooks/useOptions";
 import { useProfiles } from "@/hooks/useProfiles";
 import { useStoredState } from "@/hooks/useStoredState";
 import { useTheme } from "@/hooks/useTheme";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useMasterSwitch } from "@/hooks/useMasterSwitch";
 import { Header } from "@/components/Header";
 import { SearchBox } from "@/components/SearchBox";
@@ -21,6 +22,7 @@ export function Popup() {
   const { items, loaded, toggle, setEnabled, setManyEnabled } = useManagedItems();
   const { options } = useOptions();
   const { profiles, alwaysOnIds, isFavorite } = useProfiles();
+  const { t } = useTranslation();
   const [query, setQuery] = useStoredState("searchQuery", "", "local");
   const [activeProfile, setActiveProfile] = useStoredState<string | undefined>(
     "activeProfile",
@@ -58,9 +60,9 @@ export function Popup() {
       return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
     });
 
-  const sortedExtensions = sortItems(extensions);
-  const sortedApps = sortItems(apps);
-  const sortedFavorites = sortItems(favorites);
+  const sortedExtensions = useMemo(() => sortItems(extensions), [extensions, options.enabledFirst]);
+  const sortedApps = useMemo(() => sortItems(apps), [apps, options.enabledFirst]);
+  const sortedFavorites = useMemo(() => sortItems(favorites), [favorites, options.enabledFirst]);
 
   const isEmpty = loaded && extensions.length === 0 && apps.length === 0;
 
@@ -87,7 +89,7 @@ export function Popup() {
   const groupedSections = () => {
     const extBlock = sortedExtensions.length > 0 && (
       <section key="extensions">
-        <SectionLabel count={sortedExtensions.length}>Extensions</SectionLabel>
+        <SectionLabel count={sortedExtensions.length}>{t("extensions")}</SectionLabel>
         <ul>
           {sortedExtensions.map((item) => (
             <ItemRow
@@ -104,7 +106,7 @@ export function Popup() {
     );
     const appBlock = sortedApps.length > 0 && (
       <section key="apps">
-        <SectionLabel count={sortedApps.length}>Apps</SectionLabel>
+        <SectionLabel count={sortedApps.length}>{t("apps")}</SectionLabel>
         <ul>
           {sortedApps.map((item) => (
             <ItemRow
@@ -124,7 +126,7 @@ export function Popup() {
       const all = sortItems([...extensions, ...apps]);
       return (
         <section>
-          <SectionLabel count={all.length}>Extensions &amp; Apps</SectionLabel>
+          <SectionLabel count={all.length}>{`${t("extensions")} & ${t("apps")}`}</SectionLabel>
           <ul>
             {all.map((item) => (
               <ItemRow
@@ -162,7 +164,7 @@ export function Popup() {
       <div className="max-h-[440px] overflow-y-auto pb-2">
         {visibleProfiles.length > 0 && !query && (
           <>
-            <SectionLabel>Profiles</SectionLabel>
+            <SectionLabel>{t("profiles")}</SectionLabel>
             <ProfileChips
               profiles={visibleProfiles}
               activeProfile={activeProfile}
@@ -173,7 +175,7 @@ export function Popup() {
 
         {sortedFavorites.length > 0 && (
           <section>
-            <SectionLabel count={sortedFavorites.length}>Favorites</SectionLabel>
+            <SectionLabel count={sortedFavorites.length}>{t("favorites")}</SectionLabel>
             <ul>
               {sortedFavorites.map((item) => (
                 <ItemRow
@@ -190,7 +192,7 @@ export function Popup() {
         )}
 
         {isEmpty ? (
-          <EmptyState message="No extensions or apps found." />
+          <EmptyState message={t("noExtensionsInstalled")} />
         ) : (
           groupedSections()
         )}

@@ -39,6 +39,124 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   ÖZEL TEMALAR (YouTube, Discord, Matrix)
+   ========================================================================== */
+
+/* 1. YouTube Teması (Saf Siyah, Kırmızı Vurgular) */
+html.theme-youtube {
+  --theme-bg-paper: #0f0f0f;
+  --theme-bg-ink: #0f0f0f;
+  --theme-graphite: #181818;
+  --theme-graphite-soft: #222222;
+  --theme-graphite-line: #303030;
+  --theme-line: #272727;
+  --theme-signal: #ff0000;
+  --theme-signal-soft: #2b0000;
+  --theme-signal-dark: #ff4e45;
+  --theme-text-main: #ffffff;
+  --theme-text-muted: #aaaaaa;
+}
+
+/* 2. Discord Teması (Koyu İndigo / Gece Mavisi, Discord Blurple) */
+html.theme-discord {
+  --theme-bg-paper: #313338;
+  --theme-bg-ink: #1e1f22;
+  --theme-graphite: #2b2d31;
+  --theme-graphite-soft: #383a40;
+  --theme-graphite-line: #3f4147;
+  --theme-line: #3f4147;
+  --theme-signal: #5865f2;
+  --theme-signal-soft: #232742;
+  --theme-signal-dark: #7983f5;
+  --theme-text-main: #f2f3f5;
+  --theme-text-muted: #949ba4;
+}
+
+/* 3. Matrix Teması (Terminal Siyahı, Fosforlu Yeşil & Monospace Havası) */
+html.theme-matrix {
+  --theme-bg-paper: #0d110d;
+  --theme-bg-ink: #050805;
+  --theme-graphite: #0a100a;
+  --theme-graphite-soft: #101c10;
+  --theme-graphite-line: #173317;
+  --theme-line: #173317;
+  --theme-signal: #00ff66;
+  --theme-signal-soft: #00290f;
+  --theme-signal-dark: #33ff85;
+  --theme-text-main: #00ff66;
+  --theme-text-muted: #00aa44;
+}
+
+/* Özel Tema Değişkenlerini Tailwind sınıflarına bağlama */
+html.theme-youtube,
+html.theme-discord,
+html.theme-matrix {
+  color-scheme: dark;
+}
+
+html.theme-youtube .bg-paper,
+html.theme-discord .bg-paper,
+html.theme-matrix .bg-paper {
+  background-color: var(--theme-bg-paper) !important;
+}
+
+html.theme-youtube .bg-ink,
+html.theme-discord .bg-ink,
+html.theme-matrix .bg-ink {
+  background-color: var(--theme-bg-ink) !important;
+}
+
+html.theme-youtube .bg-graphite,
+html.theme-discord .bg-graphite,
+html.theme-matrix .bg-graphite {
+  background-color: var(--theme-graphite) !important;
+}
+
+html.theme-youtube .bg-graphite-soft,
+html.theme-discord .bg-graphite-soft,
+html.theme-matrix .bg-graphite-soft {
+  background-color: var(--theme-graphite-soft) !important;
+}
+
+html.theme-youtube .border-graphite-line,
+html.theme-discord .border-graphite-line,
+html.theme-matrix .border-graphite-line,
+html.theme-youtube .border-line,
+html.theme-discord .border-line,
+html.theme-matrix .border-line {
+  border-color: var(--theme-graphite-line) !important;
+}
+
+html.theme-youtube .bg-signal,
+html.theme-discord .bg-signal,
+html.theme-matrix .bg-signal {
+  background-color: var(--theme-signal) !important;
+  color: #ffffff !important;
+}
+html.theme-matrix .bg-signal {
+  color: #000000 !important;
+}
+
+html.theme-youtube .text-signal,
+html.theme-discord .text-signal,
+html.theme-matrix .text-signal,
+html.theme-youtube .text-signal-dark,
+html.theme-discord .text-signal-dark,
+html.theme-matrix .text-signal-dark {
+  color: var(--theme-signal-dark) !important;
+}
+
+html.theme-youtube .border-signal,
+html.theme-discord .border-signal,
+html.theme-matrix .border-signal {
+  border-color: var(--theme-signal) !important;
+}
+
+html.theme-matrix * {
+  font-family: theme("fontFamily.mono") !important;
+}
+
 @layer base {
   :root {
     color-scheme: light;

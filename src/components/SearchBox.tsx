@@ -1,4 +1,5 @@
 import { Search, X } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface SearchBoxProps {
   value: string;
@@ -6,6 +7,8 @@ interface SearchBoxProps {
 }
 
 export function SearchBox({ value, onChange }: SearchBoxProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="relative flex items-center px-3 py-2">
       <Search className="pointer-events-none absolute left-6 h-3.5 w-3.5 text-ash-400" />
@@ -14,8 +17,8 @@ export function SearchBox({ value, onChange }: SearchBoxProps) {
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Search extensions & apps"
-        aria-label="Search extensions and apps"
+        placeholder={t("searchPlaceholder")}
+        aria-label={t("searchPlaceholder")}
         className="
           w-full rounded-sm border border-line bg-white/60 py-1.5 pl-8 pr-7 text-[13px]
           text-ash-800 placeholder:text-ash-400 outline-none
@@ -26,7 +29,8 @@ export function SearchBox({ value, onChange }: SearchBoxProps) {
       {value && (
         <button
           type="button"
-          aria-label="Clear search"
+          aria-label={t("clearSearch")}
+          title={t("clearSearch")}
           onClick={() => onChange("")}
           className="absolute right-6 rounded-sm p-0.5 text-ash-400 hover:text-ash-600 dark:hover:text-ash-200"
         >
