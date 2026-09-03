@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Extensity+ | Chrome Uzantılarınızı Zahmetsizce Yönetin</title>
-  <meta name="description" content="Chrome eklentilerinizi tek tıkla açın, kapatın ve profillerle organize edin. Hızlı, hafif ve modern." />
+  <title>Extensity+ HaYTooL | Chrome Uzantılarınızı Işık Hızında Yönetin</title>
+  <meta name="description" content="Chrome eklentilerinizi tek tıkla açın, kapatın, profillerle organize edin. 6 özel tema ve 7 dil desteği." />
+  <link rel="icon" type="image/png" href="icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -17,60 +18,147 @@
   <nav class="navbar">
     <div class="container nav-content">
       <div class="logo">
-        <span class="logo-badge">⚡</span>
-        <span class="logo-text">Extensity<span>+</span></span>
+        <span class="logo-badge"><img src="icon.png" alt="Logo" width="28" height="28" style="vertical-align: middle;" /></span>
+        <span class="logo-text">Extensity<span>+</span> HaYTooL</span>
       </div>
-      <div class="nav-links">
-        <a href="#features">Özellikler</a>
-        <a href="#about">Hakkında</a>
-        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL" target="_blank" class="github-btn">GitHub</a>
+
+      <div class="nav-right">
+        <!-- Dil Seçici -->
+        <div class="lang-switcher">
+          <button type="button" class="lang-btn active" onclick="setLanguage('tr')" title="Türkçe">🇹🇷</button>
+          <button type="button" class="lang-btn" onclick="setLanguage('en')" title="English">🇬🇧</button>
+          <button type="button" class="lang-btn" onclick="setLanguage('de')" title="Deutsch">🇩🇪</button>
+          <button type="button" class="lang-btn" onclick="setLanguage('es')" title="Español">🇪🇸</button>
+          <button type="button" class="lang-btn" onclick="setLanguage('fr')" title="Français">🇫🇷</button>
+          <button type="button" class="lang-btn" onclick="setLanguage('ru')" title="Русский">🇷🇺</button>
+          <button type="button" class="lang-btn" onclick="setLanguage('ar')" title="العربية">🇸🇦</button>
+        </div>
+
+        <div class="nav-links">
+          <a href="#features" data-i18n="navFeatures">Özellikler</a>
+          <a href="#themes" data-i18n="navThemes">Temalar</a>
+          <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL" target="_blank" class="github-btn">
+            <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
       </div>
     </div>
   </nav>
 
   <header class="hero">
     <div class="container hero-content">
-      <div class="badge">🚀 Tamamen Yenilenmiş Sürüm 2.0</div>
-      <h1 class="hero-title">
+      <div class="badge" data-i18n="heroBadge">🚀 Tamamen Yenilenmiş Sürüm 2.2.0</div>
+      <h1 class="hero-title" data-i18n="heroTitle">
         Chrome Uzantılarınızı <br />
         <span class="gradient-text">Işık Hızında</span> Yönetin
       </h1>
-      <p class="hero-subtitle">
-        Kullanmadığınız eklentileri tek dokunuşla kapatın, RAM tasarrufu yapın ve profillerle kullanımınızı ayırın.
+      <p class="hero-subtitle" data-i18n="heroSubtitle">
+        Kullanmadığınız eklentileri tek dokunuşla kapatın, RAM ve pil tasarrufu yapın. Zengin temalar, özel çalışma profilleri ve 7 dünya dili ile tarayıcınızı baştan yaratın.
       </p>
-      <div class="hero-cta">
-        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL" target="_blank" class="btn btn-primary">
-          Projeyi İncele
+
+      <!-- Tarayıcı Mağaza Butonları (Store Buttons) -->
+      <div class="store-buttons">
+        <!-- Chrome Web Store -->
+        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" target="_blank" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="#4285F4"/>
+            <circle cx="12" cy="12" r="4.5" fill="#ffffff"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 .34.02.67.05 1h9.95v-1h9.95c.03-.33.05-.66.05-1 0-5.52-4.48-10-10-10z" fill="#EA4335"/>
+            <path d="M2.05 13C2.55 18.06 6.81 22 12 22c2.76 0 5.26-1.12 7.07-2.93l-4.95-8.57H2.05z" fill="#34A853"/>
+            <path d="M21.95 11h-7.83l4.95 8.57C20.88 17.76 22 15.01 22 12c0-.34-.02-.67-.05-1z" fill="#FBBC05"/>
+          </svg>
+          <div class="store-text">
+            <span class="store-sub">Chrome Web Store</span>
+            <span class="store-name">Chrome <span class="badge-soon">Releases .ZIP</span></span>
+          </div>
         </a>
-        <a href="#features" class="btn btn-secondary">Özellikleri Keşfet</a>
+
+        <!-- Microsoft Edge -->
+        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" target="_blank" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M21.94 13.11c-.27-.73-.78-1.34-1.42-1.74-.63-.39-1.37-.58-2.12-.53-1.07.07-2.07.56-2.8 1.34-.73.78-1.14 1.83-1.14 2.91 0 1.25.5 2.45 1.38 3.33s2.08 1.38 3.33 1.38c1.39 0 2.73-.62 3.63-1.69l-2.08-1.56c-.43.48-1.03.75-1.65.75-.61 0-1.19-.24-1.62-.67-.43-.43-.67-1.01-.67-1.62h8.29c.04-.3.06-.6.06-.9z" fill="#0078D7"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12c0-5.52-4.48-10-10-10z" fill="#00BCF2"/>
+          </svg>
+          <div class="store-text">
+            <span class="store-sub">Edge Add-ons</span>
+            <span class="store-name">Microsoft Edge <span class="badge-soon">Hazırlanıyor</span></span>
+          </div>
+        </a>
+
+        <!-- Helium Browser -->
+        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" target="_blank" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#a855f7" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4" fill="#38bdf8"/>
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#a855f7" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="store-text">
+            <span class="store-sub">Via Chrome Store</span>
+            <span class="store-name">Helium Browser</span>
+          </div>
+        </a>
       </div>
     </div>
   </header>
 
   <section id="features" class="features">
     <div class="container">
-      <h2 class="section-title">Neler Sunuyor?</h2>
-      <p class="section-subtitle">Gereksiz karmaşadan uzak, performans odaklı minimalist tasarım.</p>
+      <h2 class="section-title" data-i18n="featTitle">Neler Sunuyor?</h2>
+      <p class="section-subtitle" data-i18n="featSubtitle">Gereksiz karmaşadan uzak, performans ve gizlilik odaklı mimari.</p>
+      
       <div class="feature-grid">
         <div class="feature-card">
           <div class="icon">⚡</div>
-          <h3>Anında Aç / Kapat</h3>
-          <p>Eklentilerinizi anlık olarak aktif edin veya devre dışı bırakın.</p>
+          <h3 data-i18n="f1Title">Anında Aç / Kapat & Ana Şalter</h3>
+          <p data-i18n="f1Desc">Tek tıkla tüm eklentileri kapatıp tarayıcınızı hızlandırın veya açık olanları listenin başında toplayın.</p>
         </div>
+
         <div class="feature-card">
           <div class="icon">📁</div>
-          <h3>Kullanım Profilleri</h3>
-          <p>"Geliştirici", "İş" veya "Oyun" profilleriyle tek tıkla eklenti grupları çalıştırın.</p>
+          <h3 data-i18n="f2Title">Kullanım Profilleri</h3>
+          <p data-i18n="f2Desc">"Yazılım", "Tasarım", "Alışveriş" veya "Oyun" gibi profillerle tek dokunuşla ihtiyacınız olan eklentileri etkinleştirin.</p>
         </div>
+
         <div class="feature-card">
           <div class="icon">🛡️</div>
-          <h3>Always-On Kuralları</h3>
-          <p>Asla kapanmasını istemediğiniz vazgeçilmez eklentilerinizi kilitleyin.</p>
+          <h3 data-i18n="f3Title">Daima Açık (Always-On)</h3>
+          <p data-i18n="f3Desc">Şifre yöneticisi ve reklam engelleyici gibi önemli eklentilerinizi güvenceye alın; ana şalterle asla kapanmazlar.</p>
         </div>
+
         <div class="feature-card">
-          <div class="icon">✨</div>
-          <h3>Manifest V3 & Modern Mimari</h3>
-          <p>Chrome'un en güncel standartlarıyla tam uyumlu, React & TypeScript altyapısı.</p>
+          <div class="icon">🎨</div>
+          <h3 data-i18n="f4Title">6 Zengin Tema Seçeneği</h3>
+          <p data-i18n="f4Desc">Sistemle Eşle, Açık, Koyu, YouTube (Kırmızı/Siyah), Discord (Blurple/Gece Mavisi) ve Matrix (Fosforlu Yeşil Monospace).</p>
+          <div class="pill-group">
+            <span class="pill">🔴 YouTube</span>
+            <span class="pill">🎮 Discord</span>
+            <span class="pill">🟢 Matrix</span>
+            <span class="pill">🌙 Koyu</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">🌍</div>
+          <h3 data-i18n="f5Title">7 Dil & Otomatik Algılama</h3>
+          <p data-i18n="f5Desc">Tarayıcınızın arayüz dilini otomatik tanır. Ayarlardan gerçek ülke bayraklarıyla tek tıkla anında dil değiştirilebilir.</p>
+          <div class="pill-group">
+            <span class="pill">🇹🇷 TR</span>
+            <span class="pill">🇬🇧 EN</span>
+            <span class="pill">🇩🇪 DE</span>
+            <span class="pill">🇪🇸 ES</span>
+            <span class="pill">🇫🇷 FR</span>
+            <span class="pill">🇷🇺 RU</span>
+            <span class="pill">🇸🇦 AR</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">🔒</div>
+          <h3 data-i18n="f6Title">Sıfır Telemetri & %100 Gizlilik</h3>
+          <p data-i18n="f6Desc">Dış sunuculara hiçbir veri göndermez. Sadece ~288 KB boyutuyla ultra hafif, güvenli ve açık kaynaklıdır.</p>
         </div>
       </div>
     </div>
@@ -78,8 +166,72 @@
 
   <footer class="footer">
     <div class="container footer-content">
-      <p>&copy; 2026 Extensity+ | HaYToKoRaZ tarafından geliştirilmektedir.</p>
+      <p>&copy; 2026 Extensity+ HaYTooL | <a href="https://github.com/HaYToKoRaZ" target="_blank">HaYTo</a> tarafından sevgiyle geliştirilmiştir.</p>
     </div>
   </footer>
+
+  <script>
+    const DICTIONARY = {
+      tr: {
+        navFeatures: "Özellikler",
+        navThemes: "Temalar",
+        heroBadge: "🚀 Tamamen Yenilenmiş Sürüm 2.2.0",
+        heroTitle: "Chrome Uzantılarınızı <br /><span class=\"gradient-text\">Işık Hızında</span> Yönetin",
+        heroSubtitle: "Kullanmadığınız eklentileri tek dokunuşla kapatın, RAM ve pil tasarrufu yapın. Zengin temalar, özel çalışma profilleri ve 7 dünya dili ile tarayıcınızı baştan yaratın.",
+        featTitle: "Neler Sunuyor?",
+        featSubtitle: "Gereksiz karmaşadan uzak, performans ve gizlilik odaklı mimari.",
+        f1Title: "Anında Aç / Kapat & Ana Şalter",
+        f1Desc: "Tek tıkla tüm eklentileri kapatıp tarayıcınızı hızlandırın veya açık olanları listenin başında toplayın.",
+        f2Title: "Kullanım Profilleri",
+        f2Desc: "\"Yazılım\", \"Tasarım\", \"Alışveriş\" veya \"Oyun\" gibi profillerle tek dokunuşla ihtiyacınız olan eklentileri etkinleştirin.",
+        f3Title: "Daima Açık (Always-On)",
+        f3Desc: "Şifre yöneticisi ve reklam engelleyici gibi önemli eklentilerinizi güvenceye alın; ana şalterle asla kapanmazlar.",
+        f4Title: "6 Zengin Tema Seçeneği",
+        f4Desc: "Sistemle Eşle, Açık, Koyu, YouTube (Kırmızı/Siyah), Discord (Blurple/Gece Mavisi) ve Matrix (Fosforlu Yeşil Monospace).",
+        f5Title: "7 Dil & Otomatik Algılama",
+        f5Desc: "Tarayıcınızın arayüz dilini otomatik tanır. Ayarlardan gerçek ülke bayraklarıyla tek tıkla anında dil değiştirilebilir.",
+        f6Title: "Sıfır Telemetri & %100 Gizlilik",
+        f6Desc: "Dış sunuculara hiçbir veri göndermez. Sadece ~288 KB boyutuyla ultra hafif, güvenli ve açık kaynaklıdır."
+      },
+      en: {
+        navFeatures: "Features",
+        navThemes: "Themes",
+        heroBadge: "🚀 Completely Rebuilt Version 2.2.0",
+        heroTitle: "Manage Chrome Extensions <br /><span class=\"gradient-text\">At Lightning Speed</span>",
+        heroSubtitle: "Disable inactive extensions with a single click, saving RAM and battery life. Transform your browser with rich themes, custom work profiles, and 7 world languages.",
+        featTitle: "What Does It Offer?",
+        featSubtitle: "Clutter-free, performance and privacy-focused architecture.",
+        f1Title: "Instant Toggle & Master Switch",
+        f1Desc: "Turn off all extensions in one click to boost browser speed, or sort enabled items to the top.",
+        f2Title: "Work Profiles",
+        f2Desc: "Switch between contexts like \"Dev\", \"Design\", \"Shopping\", or \"Gaming\" in a single click.",
+        f3Title: "Always-On Protection",
+        f3Desc: "Lock essential extensions like password managers and ad blockers so the master switch never touches them.",
+        f4Title: "6 Rich Themes",
+        f4Desc: "Match System, Light, Dark, YouTube (Red/Black), Discord (Blurple/Midnight), and Matrix (Phosphor Green Monospace).",
+        f5Title: "7 Languages & Auto-Detection",
+        f5Desc: "Automatically detects your browser language. Switch languages instantly via crisp SVG country flags.",
+        f6Title: "Zero Telemetry & 100% Private",
+        f6Desc: "Zero tracking, zero external network calls. Ultra-lightweight under ~288 KB."
+      }
+    };
+
+    function setLanguage(lang) {
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.querySelector(`.lang-btn[onclick="setLanguage('${lang}')"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const texts = DICTIONARY[lang] || DICTIONARY.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (texts[key]) el.innerHTML = texts[key];
+      });
+    }
+
+    // Tarayıcı diline göre otomatik başlat
+    const userLang = (navigator.language || 'tr').toLowerCase();
+    if (userLang.startsWith('tr')) setLanguage('tr');
+    else setLanguage('en');
+  </script>
 </body>
 </html>
