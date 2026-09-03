@@ -23,15 +23,70 @@
       </div>
 
       <div class="nav-right">
-        <!-- Dil Seçici -->
+        <!-- SVG Bayraklı Dil Seçici (Windows Uyumlu) -->
         <div class="lang-switcher">
-          <button type="button" class="lang-btn active" onclick="setLanguage('tr')" title="Türkçe">🇹🇷</button>
-          <button type="button" class="lang-btn" onclick="setLanguage('en')" title="English">🇬🇧</button>
-          <button type="button" class="lang-btn" onclick="setLanguage('de')" title="Deutsch">🇩🇪</button>
-          <button type="button" class="lang-btn" onclick="setLanguage('es')" title="Español">🇪🇸</button>
-          <button type="button" class="lang-btn" onclick="setLanguage('fr')" title="Français">🇫🇷</button>
-          <button type="button" class="lang-btn" onclick="setLanguage('ru')" title="Русский">🇷🇺</button>
-          <button type="button" class="lang-btn" onclick="setLanguage('ar')" title="العربية">🇸🇦</button>
+          <!-- TR -->
+          <button type="button" class="lang-btn active" onclick="setLanguage('tr')" title="Türkçe">
+            <svg viewBox="0 0 1200 800" class="flag-svg">
+              <rect width="1200" height="800" fill="#E30A17" />
+              <circle cx="425" cy="400" r="200" fill="#FFFFFF" />
+              <circle cx="475" cy="400" r="160" fill="#E30A17" />
+              <polygon fill="#FFFFFF" points="583.33,400 706.87,440.14 659.73,319.86 659.73,480.14 706.87,359.86" />
+            </svg>
+          </button>
+          <!-- EN -->
+          <button type="button" class="lang-btn" onclick="setLanguage('en')" title="English">
+            <svg viewBox="0 0 60 30" class="flag-svg">
+              <clipPath id="s1"><path d="M0,0 v30 h60 v-30 z" /></clipPath>
+              <clipPath id="t1"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" /></clipPath>
+              <g clip-path="url(#s1)">
+                <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
+                <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t1)" stroke="#C8102E" stroke-width="4" />
+                <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10" />
+                <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6" />
+              </g>
+            </svg>
+          </button>
+          <!-- DE -->
+          <button type="button" class="lang-btn" onclick="setLanguage('de')" title="Deutsch">
+            <svg viewBox="0 0 5 3" class="flag-svg">
+              <rect width="5" height="3" y="0" fill="#000" />
+              <rect width="5" height="2" y="1" fill="#D00" />
+              <rect width="5" height="1" y="2" fill="#FFCE00" />
+            </svg>
+          </button>
+          <!-- ES -->
+          <button type="button" class="lang-btn" onclick="setLanguage('es')" title="Español">
+            <svg viewBox="0 0 750 500" class="flag-svg">
+              <rect width="750" height="500" fill="#AA151B" />
+              <rect width="750" height="250" y="125" fill="#F1BF00" />
+            </svg>
+          </button>
+          <!-- FR -->
+          <button type="button" class="lang-btn" onclick="setLanguage('fr')" title="Français">
+            <svg viewBox="0 0 3 2" class="flag-svg">
+              <rect width="1" height="2" x="0" fill="#002654" />
+              <rect width="1" height="2" x="1" fill="#FFFFFF" />
+              <rect width="1" height="2" x="2" fill="#CE1126" />
+            </svg>
+          </button>
+          <!-- RU -->
+          <button type="button" class="lang-btn" onclick="setLanguage('ru')" title="Русский">
+            <svg viewBox="0 0 9 6" class="flag-svg">
+              <rect width="9" height="6" fill="#fff" />
+              <rect width="9" height="4" y="2" fill="#0039A6" />
+              <rect width="9" height="2" y="4" fill="#D52B1E" />
+            </svg>
+          </button>
+          <!-- AR -->
+          <button type="button" class="lang-btn" onclick="setLanguage('ar')" title="العربية">
+            <svg viewBox="0 0 3 2" class="flag-svg">
+              <rect width="3" height="2" fill="#006C35" />
+              <circle cx="1.5" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.9" />
+              <rect width="1.4" height="0.1" x="0.8" y="1.3" rx="0.05" fill="#FFFFFF" />
+            </svg>
+          </button>
         </div>
 
         <div class="nav-links">
@@ -59,44 +114,31 @@
         Kullanmadığınız eklentileri tek dokunuşla kapatın, RAM ve pil tasarrufu yapın. Zengin temalar, özel çalışma profilleri ve 7 dünya dili ile tarayıcınızı baştan yaratın.
       </p>
 
-      <!-- Tarayıcı Mağaza Butonları (Store Buttons) -->
+      <!-- Tarayıcı Mağaza Butonları (HaYTooL-Cloud-StartPage Stili) -->
       <div class="store-buttons">
         <!-- Chrome Web Store -->
-        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" target="_blank" class="store-btn">
-          <svg viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" fill="#4285F4"/>
-            <circle cx="12" cy="12" r="4.5" fill="#ffffff"/>
-            <path d="M12 2C6.48 2 2 6.48 2 12c0 .34.02.67.05 1h9.95v-1h9.95c.03-.33.05-.66.05-1 0-5.52-4.48-10-10-10z" fill="#EA4335"/>
-            <path d="M2.05 13C2.55 18.06 6.81 22 12 22c2.76 0 5.26-1.12 7.07-2.93l-4.95-8.57H2.05z" fill="#34A853"/>
-            <path d="M21.95 11h-7.83l4.95 8.57C20.88 17.76 22 15.01 22 12c0-.34-.02-.67-.05-1z" fill="#FBBC05"/>
-          </svg>
+        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" target="_blank" class="store-btn" title="Chrome Web Store">
+          <img src="chrome.svg" alt="Chrome" width="24" height="24" style="object-fit:contain;">
           <div class="store-text">
-            <span class="store-sub">Chrome Web Store</span>
-            <span class="store-name">Chrome <span class="badge-soon">Releases .ZIP</span></span>
+            <span class="store-sub" data-i18n="storeSubChrome">Chrome Web Mağazası</span>
+            <span class="store-name">Chrome</span>
           </div>
         </a>
 
         <!-- Microsoft Edge -->
-        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" target="_blank" class="store-btn">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M21.94 13.11c-.27-.73-.78-1.34-1.42-1.74-.63-.39-1.37-.58-2.12-.53-1.07.07-2.07.56-2.8 1.34-.73.78-1.14 1.83-1.14 2.91 0 1.25.5 2.45 1.38 3.33s2.08 1.38 3.33 1.38c1.39 0 2.73-.62 3.63-1.69l-2.08-1.56c-.43.48-1.03.75-1.65.75-.61 0-1.19-.24-1.62-.67-.43-.43-.67-1.01-.67-1.62h8.29c.04-.3.06-.6.06-.9z" fill="#0078D7"/>
-            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12c0-5.52-4.48-10-10-10z" fill="#00BCF2"/>
-          </svg>
+        <a href="https://microsoftedge.microsoft.com/addons/detail/jkefcejfnbeifclgpkfkpidoegohcchp" target="_blank" class="store-btn" title="Microsoft Edge Add-ons">
+          <img src="edge.svg" alt="Edge" width="24" height="24" style="object-fit:contain;">
           <div class="store-text">
-            <span class="store-sub">Edge Add-ons</span>
-            <span class="store-name">Microsoft Edge <span class="badge-soon">Hazırlanıyor</span></span>
+            <span class="store-sub" data-i18n="storeSubEdge">Edge Eklentileri</span>
+            <span class="store-name">Microsoft Edge</span>
           </div>
         </a>
 
         <!-- Helium Browser -->
-        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" target="_blank" class="store-btn">
-          <svg viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="#a855f7" stroke-width="2"/>
-            <circle cx="12" cy="12" r="4" fill="#38bdf8"/>
-            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#a855f7" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+        <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" target="_blank" class="store-btn" title="Helium Browser (Chrome Store)">
+          <img src="helium.png" alt="Helium" width="24" height="24" style="object-fit:contain; border-radius:4px;">
           <div class="store-text">
-            <span class="store-sub">Via Chrome Store</span>
+            <span class="store-sub" data-i18n="storeSubHelium">Chrome Mağazası ile</span>
             <span class="store-name">Helium Browser</span>
           </div>
         </a>
@@ -128,7 +170,7 @@
           <p data-i18n="f3Desc">Şifre yöneticisi ve reklam engelleyici gibi önemli eklentilerinizi güvenceye alın; ana şalterle asla kapanmazlar.</p>
         </div>
 
-        <div class="feature-card">
+        <div id="themes" class="feature-card">
           <div class="icon">🎨</div>
           <h3 data-i18n="f4Title">6 Zengin Tema Seçeneği</h3>
           <p data-i18n="f4Desc">Sistemle Eşle, Açık, Koyu, YouTube (Kırmızı/Siyah), Discord (Blurple/Gece Mavisi) ve Matrix (Fosforlu Yeşil Monospace).</p>
@@ -145,13 +187,13 @@
           <h3 data-i18n="f5Title">7 Dil & Otomatik Algılama</h3>
           <p data-i18n="f5Desc">Tarayıcınızın arayüz dilini otomatik tanır. Ayarlardan gerçek ülke bayraklarıyla tek tıkla anında dil değiştirilebilir.</p>
           <div class="pill-group">
-            <span class="pill">🇹🇷 TR</span>
-            <span class="pill">🇬🇧 EN</span>
-            <span class="pill">🇩🇪 DE</span>
-            <span class="pill">🇪🇸 ES</span>
-            <span class="pill">🇫🇷 FR</span>
-            <span class="pill">🇷🇺 RU</span>
-            <span class="pill">🇸🇦 AR</span>
+            <span class="pill">🇹🇷 Türkçe</span>
+            <span class="pill">🇬🇧 English</span>
+            <span class="pill">🇩🇪 Deutsch</span>
+            <span class="pill">🇪🇸 Español</span>
+            <span class="pill">🇫🇷 Français</span>
+            <span class="pill">🇷🇺 Русский</span>
+            <span class="pill">🇸🇦 العربية</span>
           </div>
         </div>
 
@@ -178,6 +220,9 @@
         heroBadge: "🚀 Tamamen Yenilenmiş Sürüm 2.2.0",
         heroTitle: "Chrome Uzantılarınızı <br /><span class=\"gradient-text\">Işık Hızında</span> Yönetin",
         heroSubtitle: "Kullanmadığınız eklentileri tek dokunuşla kapatın, RAM ve pil tasarrufu yapın. Zengin temalar, özel çalışma profilleri ve 7 dünya dili ile tarayıcınızı baştan yaratın.",
+        storeSubChrome: "Chrome Web Mağazası",
+        storeSubEdge: "Edge Eklentileri",
+        storeSubHelium: "Chrome Mağazası ile",
         featTitle: "Neler Sunuyor?",
         featSubtitle: "Gereksiz karmaşadan uzak, performans ve gizlilik odaklı mimari.",
         f1Title: "Anında Aç / Kapat & Ana Şalter",
@@ -199,6 +244,9 @@
         heroBadge: "🚀 Completely Rebuilt Version 2.2.0",
         heroTitle: "Manage Chrome Extensions <br /><span class=\"gradient-text\">At Lightning Speed</span>",
         heroSubtitle: "Disable inactive extensions with a single click, saving RAM and battery life. Transform your browser with rich themes, custom work profiles, and 7 world languages.",
+        storeSubChrome: "Chrome Web Store",
+        storeSubEdge: "Edge Add-ons",
+        storeSubHelium: "Via Chrome Store",
         featTitle: "What Does It Offer?",
         featSubtitle: "Clutter-free, performance and privacy-focused architecture.",
         f1Title: "Instant Toggle & Master Switch",
