@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="#-english-version"><b>🇬🇧 English Version</b></a> | <a href="#-türkçe-versiyon"><b>🇹🇷 Türkçe Versiyon</b></a>
+  <a href="#-english-version"><b>🇬🇧 English Version</b></a> | <a href="#-türkçe-versiyon"><b>🇹🇷 Türkçe Versiyon</b></a> | <a href="https://haytokoraz.github.io/" target="_blank"><b>🌐 HaYTooL Portal (Diğer Uygulamalar / More Apps)</b></a>
 </p>
 
 <p align="center">
@@ -107,6 +107,14 @@ The compiled, production-ready extension will be inside the `dist/` directory.
 - Instant search filter: start typing immediately upon opening the popup.
 
 ---
+
+## 🌐 Ecosystem & More Apps
+Explore other browser extensions, start pages, and web tools by HaYTo:
+* **HaYTooL Portal:** [haytokoraz.github.io](https://haytokoraz.github.io/)
+* **Official Website:** [Extensity+ Landing Page](https://haytokoraz.github.io/ExtensityPlus-HaYTooL/)
+* **GitHub Profile:** [@HaYToKoRaZ](https://github.com/HaYToKoRaZ)
+
+---
 ---
 
 # 🇹🇷 Türkçe Versiyon
@@ -159,10 +167,11 @@ Derlenen eklenti `dist/` klasöründe hazır olacaktır.
 
 ---
 
-## 📞 Destek ve İletişim
+## 📞 Destek, Ekosistem ve İletişim
 
+* **🌐 Diğer Uygulamalarım (HaYTooL Portal):** [haytokoraz.github.io](https://haytokoraz.github.io/) *(Tüm açık kaynaklı tarayıcı araçları, başlangıç sayfaları ve uygulamalarım)*
 * **Web Sitesi:** [Extensity+ Tanıtım & Bilgi Sayfası](https://haytokoraz.github.io/ExtensityPlus-HaYTooL/)
-* **E-posta:** `korazhayto@gmail.com`
 * **GitHub:** [HaYToKoRaZ/ExtensityPlus-HaYTooL](https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL)
+* **E-posta:** `korazhayto@gmail.com`
 
 *Geliştirici:* **HaYTo**
