@@ -1,4 +1,4 @@
-name: Build & Package Extension
+name: Build & Release Extension
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-package:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,12 +31,14 @@ jobs:
         run: |
           VERSION=$(node -p "require('./manifest.json').version")
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "TAG=v$VERSION" >> $GITHUB_OUTPUT
           echo "Detected Extension Version: $VERSION"
 
       - name: Build Extension
         run: npm run build
 
       - name: Create WebStore ZIP Package
+        id: create_zip
         run: |
           VERSION="${{ steps.get_version.outputs.VERSION }}"
           ZIP_NAME="ExtensityPlus-HaYTooL-v${VERSION}-WebStore.zip"
@@ -44,7 +46,7 @@ jobs:
           zip -r -9 "../${ZIP_NAME}" .
           cd ..
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
-        id: create_zip
+          echo "ZIP_PATH=${ZIP_NAME}" >> $GITHUB_OUTPUT
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -53,12 +55,22 @@ jobs:
           path: ${{ steps.create_zip.outputs.ZIP_NAME }}
           retention-days: 90
 
-      - name: Create or Update GitHub Release (Optional Tag Release)
+      - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
         with:
           files: ${{ steps.create_zip.outputs.ZIP_NAME }}
-          name: "Extensity+ HaYTooL v${{ steps.get_version.outputs.VERSION }}"
+          tag_name: ${{ steps.get_version.outputs.TAG }}
+          name: "Extensity+ HaYTooL ${{ steps.get_version.outputs.TAG }}"
+          body: |
+            ### 🚀 Extensity+ HaYTooL ${{ steps.get_version.outputs.TAG }}
+            
+            Tarayıcınıza yüklemek için aşağıdaki ZIP dosyasını indirip çıkartabilir ya da doğrudan mağazalara yükleyebilirsiniz.
+
+            #### 📦 İndirilebilir Paketler:
+            - **${{ steps.create_zip.outputs.ZIP_NAME }}**
+
+            ---
+            *Otomatik GitHub Actions tarafından derlenmiş ve yayınlanmıştır.*
           draft: false
           prerelease: false
         env:
