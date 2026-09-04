@@ -1,7 +1,7 @@
 {
   "name": "extensityplus-haytool",
-  "version": "3.1.0",
-  "description": "Extensity — lightning-fast Chrome extension toggling, profiles, favorites, and Always On rules.",
+  "version": "3.1.1",
+  "description": "Extensity — lightning-fast extension toggling, profiles, favorites, and Always On rules.",
   "type": "module",
   "private": true,
   "scripts": {

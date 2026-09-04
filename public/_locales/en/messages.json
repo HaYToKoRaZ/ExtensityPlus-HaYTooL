@@ -4,7 +4,7 @@
     "description": "The name of the extension."
   },
   "appDesc": {
-    "message": "Quickly enable, disable, and organize your Chrome extensions. Profiles, favorites, and Always On rules included.",
+    "message": "Quickly enable, disable, and organize your browser extensions. Profiles, favorites, and Always On rules included.",
     "description": "The description of the extension."
   },
   "actionTitle": {

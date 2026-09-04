@@ -2,7 +2,7 @@
   <img src="public/images/icon128.png" alt="Extensity+ HaYTooL Logo" width="110" style="border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,0.35);"/>
 </p>
 
-# <p align="center">⚡ Extensity+ HaYTooL (v3.1.0)</p>
+# <p align="center">⚡ Extensity+ HaYTooL (v3.1.1)</p>
 
 <p align="center">
   <b>The Ultimate Browser Extension Manager: Instant Toggling, Custom Profiles, Rich Themes & Multi-Language Support</b><br/>
@@ -22,7 +22,7 @@
   <img src="https://img.shields.io/badge/UI-Tailwind%20CSS%20%7C%20Lucide%20Icons-1572B6?style=for-the-badge&logo=tailwindcss" alt="UI" />
   <img src="https://img.shields.io/badge/Themes-YouTube%20%7C%20Discord%20%7C%20Matrix%20%7C%20Dark-ff0000?style=for-the-badge" alt="Themes" />
   <img src="https://img.shields.io/badge/Locales-7%20Languages%20Auto--Detect-4af626?style=for-the-badge" alt="Locales" />
-  <img src="https://img.shields.io/badge/Version-v3.1.0-purple?style=for-the-badge&logo=git" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-v3.1.1-purple?style=for-the-badge&logo=git" alt="Version" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
   <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest"><img src="https://img.shields.io/github/downloads/HaYToKoRaZ/ExtensityPlus-HaYTooL/latest/total?style=for-the-badge&color=blueviolet" alt="GitHub Downloads (latest release)" /></a>
 </p>
@@ -90,7 +90,7 @@ Modern web development and daily browsing quickly lead to "extension bloat." Doz
 
 ### Option 1: Direct Download from GitHub Releases (Recommended)
 1. Go to the [Latest Releases](https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest) page.
-2. Download `ExtensityPlus-HaYTooL-v3.1.0-WebStore.zip` and unzip it.
+2. Download `ExtensityPlus-HaYTooL-v3.1.1-WebStore.zip` and unzip it.
 3. Open your browser's extension page (`chrome://extensions` or `edge://extensions`).
 4. Turn on **Developer Mode** (top-right toggle).
 5. Click **Load unpacked** and select the unzipped folder.
@@ -168,7 +168,7 @@ Günlük web gezintisi ve geliştirme süreçlerinde onlarca eklenti kurarız. A
 
 ### Yöntem 1: GitHub Releases Üzerinden (Hızlı Kurulum)
 1. [En Son Sürümler (Releases)](https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest) sayfasına gidin.
-2. `ExtensityPlus-HaYTooL-v3.1.0-WebStore.zip` dosyasını indirin ve bir klasöre çıkartın.
+2. `ExtensityPlus-HaYTooL-v3.1.1-WebStore.zip` dosyasını indirin ve bir klasöre çıkartın.
 3. Tarayıcınızda eklentiler sayfasına gidin (`chrome://extensions` veya `edge://extensions`).
 4. Sağ üst köşedeki **Geliştirici Modu (Developer Mode)** anahtarını açın.
 5. **Paketlenmemiş öge yükle (Load unpacked)** butonuna tıklayın ve çıkarttığınız klasörü seçin.
