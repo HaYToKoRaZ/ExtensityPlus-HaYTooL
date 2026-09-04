@@ -23,6 +23,7 @@
   <img src="https://img.shields.io/badge/Themes-YouTube%20%7C%20Discord%20%7C%20Matrix%20%7C%20Dark-ff0000?style=for-the-badge" alt="Themes" />
   <img src="https://img.shields.io/badge/Locales-7%20Languages%20Auto--Detect-4af626?style=for-the-badge" alt="Locales" />
   <img src="https://img.shields.io/badge/Version-v3.1.1-purple?style=for-the-badge&logo=git" alt="Version" />
+  <a href="https://microsoftedge.microsoft.com/addons/detail/0RDCKCFR4THN" target="_blank"><img src="https://img.shields.io/badge/Microsoft_Edge-In_Review-0078D7?style=for-the-badge&logo=microsoftedge&logoColor=white" alt="Microsoft Edge Add-ons" /></a>
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
   <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest"><img src="https://img.shields.io/github/downloads/HaYToKoRaZ/ExtensityPlus-HaYTooL/latest/total?style=for-the-badge&color=blueviolet" alt="GitHub Downloads (latest release)" /></a>
 </p>
@@ -88,14 +89,17 @@ Modern web development and daily browsing quickly lead to "extension bloat." Doz
 
 ## 🛠️ Installation & Setup
 
-### Option 1: Direct Download from GitHub Releases (Recommended)
+### Option 1: Microsoft Edge Add-ons Store (Official)
+Install directly from the [Microsoft Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/0RDCKCFR4THN) *(Pending Certification / In Review)*.
+
+### Option 2: Direct Download from GitHub Releases (Manual)
 1. Go to the [Latest Releases](https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest) page.
 2. Download `ExtensityPlus-HaYTooL-v3.1.1-WebStore.zip` and unzip it.
 3. Open your browser's extension page (`chrome://extensions` or `edge://extensions`).
 4. Turn on **Developer Mode** (top-right toggle).
 5. Click **Load unpacked** and select the unzipped folder.
 
-### Option 2: Build from Source
+### Option 3: Build from Source
 ```bash
 # Clone the repository
 git clone https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL.git
@@ -166,14 +170,17 @@ Günlük web gezintisi ve geliştirme süreçlerinde onlarca eklenti kurarız. A
 
 ## 🛠️ Kurulum
 
-### Yöntem 1: GitHub Releases Üzerinden (Hızlı Kurulum)
+### Yöntem 1: Microsoft Edge Eklenti Mağazası (Resmi)
+Doğrudan [Microsoft Edge Add-ons Mağazası](https://microsoftedge.microsoft.com/addons/detail/0RDCKCFR4THN) üzerinden tek tıkla kurabilirsiniz *(Sertifikasyon / Onay Sürecinde)*.
+
+### Yöntem 2: GitHub Releases Üzerinden (Manuel Kurulum)
 1. [En Son Sürümler (Releases)](https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest) sayfasına gidin.
 2. `ExtensityPlus-HaYTooL-v3.1.1-WebStore.zip` dosyasını indirin ve bir klasöre çıkartın.
 3. Tarayıcınızda eklentiler sayfasına gidin (`chrome://extensions` veya `edge://extensions`).
 4. Sağ üst köşedeki **Geliştirici Modu (Developer Mode)** anahtarını açın.
 5. **Paketlenmemiş öge yükle (Load unpacked)** butonuna tıklayın ve çıkarttığınız klasörü seçin.
 
-### Yöntem 2: Kaynak Koddan Derleme
+### Yöntem 3: Kaynak Koddan Derleme
 ```bash
 git clone https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL.git
 cd ExtensityPlus-HaYTooL/ExtensityPlus-HaYTooL
