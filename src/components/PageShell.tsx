@@ -3,7 +3,7 @@ import { APP_NAME } from "@/lib/branding";
 import { useTranslation } from "@/hooks/useTranslation";
 
 interface PageShellProps {
-  active: "options" | "profiles";
+  active: "options" | "profiles" | "backup";
   children: ReactNode;
 }
 
@@ -23,6 +23,7 @@ export function PageShell({ active, children }: PageShellProps) {
           <nav className="ml-auto flex gap-1 rounded-pill border border-line bg-white p-1 dark:border-graphite-line dark:bg-graphite-soft">
             <TabLink href="/options.html" label={t("options")} active={active === "options"} />
             <TabLink href="/profiles.html" label={t("profiles")} active={active === "profiles"} />
+            <TabLink href="/backup.html" label={t("backupAndSync")} active={active === "backup"} />
           </nav>
         </header>
 

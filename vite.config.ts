@@ -31,6 +31,7 @@ export default defineConfig({
         index: resolve(import.meta.dirname, "index.html"),
         options: resolve(import.meta.dirname, "options.html"),
         profiles: resolve(import.meta.dirname, "profiles.html"),
+        backup: resolve(import.meta.dirname, "backup.html"),
         background: resolve(import.meta.dirname, "src/background/service-worker.ts"),
       },
       output: {

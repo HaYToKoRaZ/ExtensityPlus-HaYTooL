@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useManagedItems } from "@/hooks/useManagedItems";
 import { useOptions } from "@/hooks/useOptions";
 import { useProfiles } from "@/hooks/useProfiles";
@@ -13,6 +13,13 @@ import { ItemRow } from "@/components/ItemRow";
 import { ProfileChips } from "@/components/ProfileChips";
 import { EmptyState } from "@/components/EmptyState";
 import type { ManagedItem, Profile } from "@/lib/types";
+import {
+  STORAGE_KEY_USER_PROFILE,
+  STORAGE_KEY_TOKEN,
+  verifyGitHubToken,
+  type GitHubUserProfile,
+} from "@/lib/gist-sync";
+import { storageGet } from "@/lib/storage";
 
 function matches(item: ManagedItem, query: string) {
   return !query || item.name.toUpperCase().includes(query.toUpperCase());
@@ -29,6 +36,25 @@ export function Popup() {
     undefined,
     "sync",
   );
+  const [userProfile, setUserProfile] = useStoredState<GitHubUserProfile | null>(
+    STORAGE_KEY_USER_PROFILE,
+    null,
+    "local",
+  );
+
+  useEffect(() => {
+    void (async () => {
+      const savedToken = await storageGet<string>(STORAGE_KEY_TOKEN, "", true);
+      if (savedToken && !userProfile) {
+        try {
+          const profile = await verifyGitHubToken(savedToken);
+          setUserProfile(profile);
+        } catch {
+          // Token might be revoked or device offline
+        }
+      }
+    })();
+  }, [userProfile, setUserProfile]);
 
   useTheme(options.theme);
 
@@ -155,7 +181,10 @@ export function Popup() {
           onFlip={flip}
           onOpenOptions={() => openTab(chrome.runtime.getURL("options.html"))}
           onOpenProfiles={() => openTab(chrome.runtime.getURL("profiles.html"))}
+          onOpenBackup={() => openTab(chrome.runtime.getURL("backup.html"))}
           onOpenChromeExtensions={() => openTab("chrome://extensions")}
+          userAvatarUrl={userProfile?.avatarUrl}
+          userLogin={userProfile?.login}
         />
       )}
 
