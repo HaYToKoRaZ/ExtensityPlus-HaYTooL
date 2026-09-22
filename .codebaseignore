@@ -1,0 +1,52 @@
+# ==========================================
+# Bağımlılıklar & Paket Yöneticileri
+# ==========================================
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ==========================================
+# Derleme ve Çıktı Dosyaları (Build / Dist)
+# ==========================================
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# ==========================================
+# Git & Sürüm Kontrolü
+# ==========================================
+.git/
+.github/
+
+# ==========================================
+# IDE, Editör ve Yapay Zeka Ajan Dosyaları
+# ==========================================
+.agents/
+.bare/
+.vscode/
+.idea/
+*.log
+
+# ==========================================
+# Medya, Görsel ve Ağır Statik Dosyalar
+# (Kod analizi için lüzumsuz binary dosyalar)
+# ==========================================
+screenshots/
+public/icons/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.webp
+*.mp4
+
+# ==========================================
+# Arşivler ve Harici Klasörler
+# ==========================================
+*.zip
+*.tar.gz
+websites/

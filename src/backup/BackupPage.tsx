@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import {
   Cloud,
   Download,
@@ -176,8 +176,9 @@ export function BackupPage() {
           setSelectedSlot(files[0]);
         }
       }
-    } catch (err: any) {
-      setAuthError(err.message || "Failed to connect to GitHub");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to connect to GitHub";
+      setAuthError(message);
       setUserProfile(null);
       setActiveGist(null);
       await storageSet(STORAGE_KEY_USER_PROFILE, null, true);
@@ -228,8 +229,8 @@ export function BackupPage() {
 
       setCloudSuccessMsg(t("pushSuccess"));
       setTimeout(() => setCloudSuccessMsg(null), 3000);
-    } catch (err: any) {
-      alert(err.message || "Cloud push failed");
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : "Cloud push failed");
     } finally {
       setCloudPushing(false);
     }
@@ -247,8 +248,8 @@ export function BackupPage() {
 
       setStagedBackup(parsed);
       setDiffSummary(diff);
-    } catch (err: any) {
-      alert(err.message || "Failed to load cloud backup");
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : "Failed to load cloud backup");
     } finally {
       setRestoring(false);
     }
@@ -264,8 +265,8 @@ export function BackupPage() {
         const history = await getGistCommitHistory(tokenInput, activeGist.id);
         setCommitHistory(history);
         setShowTimeMachine(true);
-      } catch (err: any) {
-        alert(err.message || "Failed to load history");
+      } catch (err: unknown) {
+        alert(err instanceof Error ? err.message : "Failed to load history");
       } finally {
         setHistoryLoading(false);
       }
@@ -289,15 +290,15 @@ export function BackupPage() {
         setMissingItems(result.missingExtensions);
         setShowMissingModal(true);
       }
-    } catch (err: any) {
-      alert(err.message || "Restore failed");
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : "Restore failed");
     } finally {
       setRestoring(false);
     }
   };
 
   // Yerel Dosyadan Yükleme (.json)
-  const handleFileImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileImport = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -307,8 +308,8 @@ export function BackupPage() {
       const diff = await computeBackupDiff(parsed);
       setStagedBackup(parsed);
       setDiffSummary(diff);
-    } catch (err: any) {
-      alert(err.message || "Invalid backup file");
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : "Invalid backup file");
     } finally {
       if (fileInputRef.current) fileInputRef.current.value = "";
     }
@@ -323,8 +324,8 @@ export function BackupPage() {
       setDiffSummary(diff);
       setShowPasteModal(false);
       setPasteInput("");
-    } catch (err: any) {
-      alert(err.message || "Invalid JSON code");
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : "Invalid JSON code");
     }
   };
 

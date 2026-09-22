@@ -1,6 +1,6 @@
 {
   "name": "extensityplus-haytool",
-  "version": "3.1.1",
+  "version": "3.1.4",
   "description": "Extensity — lightning-fast extension toggling, profiles, favorites, and Always On rules.",
   "type": "module",
   "private": true,

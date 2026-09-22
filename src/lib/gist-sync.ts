@@ -79,14 +79,16 @@ export async function verifyGitHubToken(token: string): Promise<GitHubUserProfil
   };
 }
 
-function normalizeGistFiles(filesObj: any): Record<string, GistFileInfo> {
+function normalizeGistFiles(filesObj: unknown): Record<string, GistFileInfo> {
   const normalized: Record<string, GistFileInfo> = {};
-  for (const [key, val] of Object.entries(filesObj || {})) {
-    const item = val as any;
+  if (!filesObj || typeof filesObj !== "object") return normalized;
+
+  for (const [key, val] of Object.entries(filesObj)) {
+    const item = (val && typeof val === "object" ? val : {}) as Record<string, unknown>;
     normalized[key] = {
-      filename: item.filename || key,
-      size: item.size || 0,
-      rawUrl: item.raw_url || item.rawUrl || "",
+      filename: typeof item.filename === "string" ? item.filename : key,
+      size: typeof item.size === "number" ? item.size : 0,
+      rawUrl: typeof item.raw_url === "string" ? item.raw_url : typeof item.rawUrl === "string" ? item.rawUrl : "",
     };
   }
   return normalized;
@@ -114,7 +116,7 @@ export async function findExistingBackupGist(token: string): Promise<GistVault |
     description: string | null;
     html_url: string;
     updated_at: string;
-    files: Record<string, any>;
+    files: Record<string, unknown>;
   }>;
 
   // 1. Öncelik: Açıklamasında tam etiketimiz geçen Gist
@@ -314,19 +316,19 @@ export async function fetchGistContent(
     throw new Error(`Failed to read Gist content: ${res.status}`);
   }
 
-  const data = await res.json();
+  const data = (await res.json()) as { files?: Record<string, { filename?: string; content?: string }> };
   const fileObj = data.files && data.files[filename];
 
   if (!fileObj) {
     // İlk bulunan json dosyasını fallback al
     const anyJson = Object.values(data.files || {}).find(
-      (f: any) => f.filename && f.filename.endsWith(".json")
-    ) as any;
+      (f) => f.filename && f.filename.endsWith(".json")
+    );
     if (anyJson && anyJson.content) {
       return anyJson.content;
     }
     throw new Error(`File '${filename}' not found in Gist.`);
   }
 
-  return fileObj.content;
+  return fileObj.content || "";
 }

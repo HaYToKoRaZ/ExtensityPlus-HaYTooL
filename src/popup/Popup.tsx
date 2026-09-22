@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useManagedItems } from "@/hooks/useManagedItems";
 import { useOptions } from "@/hooks/useOptions";
 import { useProfiles } from "@/hooks/useProfiles";
@@ -80,15 +80,18 @@ export function Popup() {
     [items, isFavorite, query],
   );
 
-  const sortItems = (list: ManagedItem[]) =>
-    [...list].sort((a, b) => {
-      if (options.enabledFirst && a.enabled !== b.enabled) return a.enabled ? -1 : 1;
-      return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
-    });
+  const sortItems = useCallback(
+    (list: ManagedItem[]) =>
+      [...list].sort((a, b) => {
+        if (options.enabledFirst && a.enabled !== b.enabled) return a.enabled ? -1 : 1;
+        return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
+      }),
+    [options.enabledFirst],
+  );
 
-  const sortedExtensions = useMemo(() => sortItems(extensions), [extensions, options.enabledFirst]);
-  const sortedApps = useMemo(() => sortItems(apps), [apps, options.enabledFirst]);
-  const sortedFavorites = useMemo(() => sortItems(favorites), [favorites, options.enabledFirst]);
+  const sortedExtensions = useMemo(() => sortItems(extensions), [extensions, sortItems]);
+  const sortedApps = useMemo(() => sortItems(apps), [apps, sortItems]);
+  const sortedFavorites = useMemo(() => sortItems(favorites), [favorites, sortItems]);
 
   const isEmpty = loaded && extensions.length === 0 && apps.length === 0;
 

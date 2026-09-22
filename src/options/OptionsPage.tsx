@@ -7,7 +7,7 @@ import { useOptions } from "@/hooks/useOptions";
 import { useTheme } from "@/hooks/useTheme";
 import { useTranslation } from "@/hooks/useTranslation";
 import { LANGUAGE_OPTIONS, THEME_OPTIONS, type Language, type TranslationKey } from "@/lib/i18n";
-import { APP_VERSION, CONTACT_EMAIL, REPO_URL, WEBSITE_URL } from "@/lib/branding";
+import { APP_VERSION, CONTACT_EMAIL, PORTAL_URL, REPO_URL, WEBSITE_URL } from "@/lib/branding";
 import type { ExtendedOptions } from "@/lib/types";
 
 export function OptionsPage() {
@@ -165,6 +165,44 @@ export function OptionsPage() {
             >
               <Mail className="h-3.5 w-3.5 text-signal-dark dark:text-signal" />
               <span>{t("sendEmail")}</span>
+            </a>
+          </div>
+
+          {/* Resmi Web Sitesi Bağlantısı */}
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center gap-1.5">
+              <Globe className="h-4 w-4 text-signal-dark dark:text-signal" />
+              <p className="text-[12.5px] text-ash-500 dark:text-ash-400">
+                {t("officialWebsite")}
+              </p>
+            </div>
+            <a
+              href={WEBSITE_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-[12.5px] font-medium text-ash-600 hover:text-signal-dark dark:text-ash-300 dark:hover:text-signal"
+            >
+              <span>haytokoraz.github.io/ExtensityPlus-HaYTooL</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
+
+          {/* HaYTooL Portal Bağlantısı */}
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center gap-1.5">
+              <Globe className="h-4 w-4 text-signal-dark dark:text-signal" />
+              <p className="text-[12.5px] text-ash-500 dark:text-ash-400">
+                {t("devPortal")}
+              </p>
+            </div>
+            <a
+              href={PORTAL_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-[12.5px] font-medium text-ash-600 hover:text-signal-dark dark:text-ash-300 dark:hover:text-signal"
+            >
+              <span>haytokoraz.github.io</span>
+              <ExternalLink className="h-3 w-3" />
             </a>
           </div>
 

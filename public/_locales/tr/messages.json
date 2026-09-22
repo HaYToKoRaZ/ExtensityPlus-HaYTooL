@@ -10,5 +10,13 @@
   "actionTitle": {
     "message": "Extensity+ HaYTooL",
     "description": "Action popup title."
+  },
+  "contextMenuWebsite": {
+    "message": "🌐 Resmi Web Sitesi",
+    "description": "Right click menu item for official website."
+  },
+  "contextMenuPortal": {
+    "message": "🚀 HaYTooL Portal (Tüm Projeler)",
+    "description": "Right click menu item for HaYTooL portal."
   }
 }

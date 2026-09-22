@@ -84,7 +84,7 @@ export async function exportBackupData(): Promise<BackupPayload> {
  * JSON formatındaki yedek metnini doğrular ve tip güvenli nesneye dönüştürür.
  */
 export function validateAndParseBackup(rawJson: string): BackupPayload {
-  let parsed: any;
+  let parsed: unknown;
   try {
     parsed = JSON.parse(rawJson);
   } catch {
@@ -95,12 +95,14 @@ export function validateAndParseBackup(rawJson: string): BackupPayload {
     throw new Error("Backup file must contain a valid JSON object.");
   }
 
-  if (parsed.app !== "ExtensityPlus-HaYTooL") {
+  const obj = parsed as Record<string, unknown>;
+
+  if (obj.app !== "ExtensityPlus-HaYTooL") {
     throw new Error("This file is not a valid Extensity+ HaYTooL backup.");
   }
 
-  if (!parsed.options || !parsed.profiles || !Array.isArray(parsed.extensions)) {
-    throw new Error("Corrupted backup schema: missing options, profiles, or extensions.");
+  if (!Array.isArray(obj.extensions) || !Array.isArray(obj.profiles)) {
+    throw new Error("Corrupted backup: missing extensions or profiles list.");
   }
 
   return parsed as BackupPayload;
