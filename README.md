@@ -37,6 +37,21 @@
   <img src="https://img.shields.io/badge/Zero_Telemetry-100%25_Private-success?style=flat-square" alt="Zero Telemetry" />
 </p>
 
+
+### 🌐 Supported Browsers & Store Downloads
+<p align="center">
+  <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" title="Chrome Web Store (Releases)">
+    <img src="public/badges/chrome.svg" alt="Chrome Web Store" width="40" height="40" style="margin: 0 10px;" />
+  </a>
+  <a href="https://microsoftedge.microsoft.com/addons/detail/0RDCKCFR4THN" title="Microsoft Edge Add-ons">
+    <img src="public/badges/edge.svg" alt="Microsoft Edge" width="40" height="40" style="margin: 0 10px;" />
+  </a>
+  <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest" title="Helium Browser (Releases)">
+    <img src="public/badges/helium.png" alt="Helium Browser" width="40" height="40" style="margin: 0 10px;" />
+  </a>
+</p>
+
+
 ---
 
 <p align="center">
