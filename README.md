@@ -25,7 +25,8 @@
   <img src="https://img.shields.io/badge/Version-v3.1.1-purple?style=for-the-badge&logo=git" alt="Version" />
   <a href="https://microsoftedge.microsoft.com/addons/detail/0RDCKCFR4THN" target="_blank"><img src="https://img.shields.io/badge/Microsoft_Edge-In_Review-0078D7?style=for-the-badge&logo=microsoftedge&logoColor=white" alt="Microsoft Edge Add-ons" /></a>
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
-  <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest"><img src="https://img.shields.io/github/downloads/HaYToKoRaZ/ExtensityPlus-HaYTooL/latest/total?style=for-the-badge&color=blueviolet" alt="GitHub Downloads (latest release)" /></a>
+  <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases/latest"><img src="https://img.shields.io/github/downloads/HaYToKoRaZ/ExtensityPlus-HaYTooL/latest/total?color=success&label=Latest%20Release%20Downloads" alt="Latest Release Downloads" /></a>
+  <a href="https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL/releases"><img src="https://img.shields.io/github/downloads/HaYToKoRaZ/ExtensityPlus-HaYTooL/total?color=2ea44f&label=Total%20Downloads" alt="Total Downloads" /></a>
 </p>
 
 <p align="center">
