@@ -1,4 +1,16 @@
+# Robots.txt for Extensity+ HaYTooL
+# Compatible with Googlebot, Bingbot, DuckDuckBot, Yandex, Applebot
+
 User-agent: *
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Googlebot
 Allow: /
 
 Sitemap: https://haytokoraz.github.io/ExtensityPlus-HaYTooL/sitemap.xml
