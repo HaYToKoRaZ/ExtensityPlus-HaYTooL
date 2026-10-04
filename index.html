@@ -92,20 +92,40 @@
 
   <link rel="icon" type="image/png" href="icon.png" />
   
-  <!-- 🚀 Zero Render-Blocking: Preconnect, Non-blocking Fonts & Async CSS -->
+  <!-- 🚀 Zero-CLS & Performance: Preconnect Fonts + font-display=swap + Synchronous CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" media="print" onload="this.media='all'" />
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" />
-  </noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Critical Anti-CLS CSS (Zero FOUT & Zero Layout Jump) */
+    :root {
+      --bg-color: #090d16;
+      --text-main: #f8fafc;
+      --card-bg: rgba(15, 23, 42, 0.7);
+    }
+    html, body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.4;
+      contain: paint layout;
+    }
+    .glow-1 { top: -100px; left: -100px; width: 400px; height: 400px; }
+    .glow-2 { top: 40%; right: -100px; width: 500px; height: 500px; }
+    .hero-subtitle { min-height: 48px; }
+  </style>
 
-  <link rel="preload" as="style" href="style.css" />
-  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'" />
-  <noscript>
-    <link rel="stylesheet" href="style.css" />
-  </noscript>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="glow glow-1"></div>
