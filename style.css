@@ -621,12 +621,16 @@ body {
 }
 
 .footer a {
-  color: var(--text-muted);
-  text-decoration: none;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .footer a:hover {
-  color: var(--primary);
+  color: #67e8f9;
+  text-decoration-thickness: 2px;
 }
 
 @media (max-width: 768px) {
