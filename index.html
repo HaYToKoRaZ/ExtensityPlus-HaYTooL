@@ -22,6 +22,9 @@
   <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#090d16" />
 
+  <!-- ⚡ LCP Optimization (Preload Critical Hero Image with High Fetch Priority) -->
+  <link rel="preload" as="image" href="mascot.png" fetchpriority="high" />
+
   <!-- 🌐 Multilingual International SEO (Hreflang for 7 supported languages - Cluster Aligned) -->
   <link rel="alternate" hreflang="x-default" href="https://haytokoraz.github.io/ExtensityPlus-HaYTooL/" />
   <link rel="alternate" hreflang="en" href="https://haytokoraz.github.io/ExtensityPlus-HaYTooL/" />
@@ -243,7 +246,7 @@
 
         <!-- 🐱 Eklenti Canbazı Kedi Maskotu -->
         <div class="hero-mascot-wrapper">
-          <img src="mascot.png" alt="HaYTooL Cat Mascot managing extensions" class="hero-mascot" />
+          <img src="mascot.png" alt="HaYTooL Cat Mascot managing extensions" class="hero-mascot" fetchpriority="high" decoding="async" width="280" height="280" />
           <span class="mascot-tag">🐾 Uzantı Canbazı Kedicik</span>
         </div>
       </div>
