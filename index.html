@@ -23,7 +23,7 @@
   <meta name="theme-color" content="#090d16" />
 
   <!-- ⚡ LCP Optimization (Preload Critical Hero Image with High Fetch Priority) -->
-  <link rel="preload" as="image" href="mascot.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="mascot.webp" type="image/webp" fetchpriority="high" />
 
   <!-- 🌐 Multilingual International SEO (Hreflang for 7 supported languages - Cluster Aligned) -->
   <link rel="alternate" hreflang="x-default" href="https://haytokoraz.github.io/ExtensityPlus-HaYTooL/" />
@@ -235,7 +235,10 @@
 
             <!-- Helium Browser -->
             <a href="https://chromewebstore.google.com/detail/extensity+-haytool/mpcogfjfimnlfamonkfelppdcdhfhcom" target="_blank" rel="noopener noreferrer nofollow" class="store-btn" title="Helium Browser (Chrome Store)">
-              <img src="helium.png" alt="Helium" width="24" height="24" style="object-fit:contain; border-radius:4px;">
+              <picture>
+                <source srcset="helium.webp" type="image/webp" />
+                <img src="helium.png" alt="Helium" width="24" height="24" style="object-fit:contain; border-radius:4px;" loading="lazy" decoding="async">
+              </picture>
               <div class="store-text">
                 <span class="store-sub" data-i18n="storeSubHelium">Chrome Mağazası ile</span>
                 <span class="store-name">Helium Browser</span>
@@ -244,9 +247,12 @@
           </div>
         </div>
 
-        <!-- 🐱 Eklenti Canbazı Kedi Maskotu -->
+        <!-- 🐱 Eklenti Canbazı Kedi Maskotu (LCP Hero Element) -->
         <div class="hero-mascot-wrapper">
-          <img src="mascot.png" alt="HaYTooL Cat Mascot managing extensions" class="hero-mascot" fetchpriority="high" decoding="async" width="280" height="280" />
+          <picture>
+            <source srcset="mascot.webp" type="image/webp" />
+            <img src="mascot.png" alt="HaYTooL Cat Mascot managing extensions" class="hero-mascot" fetchpriority="high" decoding="async" width="280" height="280" />
+          </picture>
           <span class="mascot-tag">🐾 Uzantı Canbazı Kedicik</span>
         </div>
       </div>
@@ -258,19 +264,31 @@
     <div class="container">
       <div class="showcase-grid">
         <div class="showcase-card">
-          <img src="screenshots/turkce-ayarlar.png" alt="Options Page - Turkish UI & 2x2 Grid" loading="lazy">
+          <picture>
+            <source srcset="screenshots/turkce-ayarlar.webp" type="image/webp" />
+            <img src="screenshots/turkce-ayarlar.png" alt="Options Page - Turkish UI & 2x2 Grid" width="600" height="445" loading="lazy" decoding="async">
+          </picture>
           <div class="showcase-caption" data-i18n="captionOptions">⚡ Ayarlar Sayfası: 2x2 Ferah Izgara, Zengin Temalar & Bayraklar</div>
         </div>
         <div class="showcase-card">
-          <img src="screenshots/ingilizce-ayarlar.png" alt="Settings Page - English UI & Multi-Language" loading="lazy">
+          <picture>
+            <source srcset="screenshots/ingilizce-ayarlar.webp" type="image/webp" />
+            <img src="screenshots/ingilizce-ayarlar.png" alt="Settings Page - English UI & Multi-Language" width="600" height="445" loading="lazy" decoding="async">
+          </picture>
           <div class="showcase-caption" data-i18n="captionEnglish">🌐 Settings Page: Dynamic Auto-Detection & Global Profiles</div>
         </div>
         <div class="showcase-card">
-          <img src="screenshots/2.jpeg" alt="Profiles Page - Always-On & Profiles" loading="lazy">
+          <picture>
+            <source srcset="screenshots/2.webp" type="image/webp" />
+            <img src="screenshots/2.jpeg" alt="Profiles Page - Always-On & Profiles" width="600" height="452" loading="lazy" decoding="async">
+          </picture>
           <div class="showcase-caption" data-i18n="captionProfiles">📁 Profiller Sayfası: Daima Açık Kuralları & Çalışma Alanları</div>
         </div>
         <div class="showcase-card">
-          <img src="screenshots/3.jpeg" alt="Backup & Cloud Sync - GitHub Gist" loading="lazy">
+          <picture>
+            <source srcset="screenshots/3.webp" type="image/webp" />
+            <img src="screenshots/3.jpeg" alt="Backup & Cloud Sync - GitHub Gist" width="600" height="563" loading="lazy" decoding="async">
+          </picture>
           <div class="showcase-caption" data-i18n="captionBackup">☁️ Yedekleme & Bulut Eşitleme: GitHub Gist Kasası & Çevrimdışı Mod</div>
         </div>
       </div>
