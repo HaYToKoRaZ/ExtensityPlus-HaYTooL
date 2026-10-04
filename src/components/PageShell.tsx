@@ -4,15 +4,16 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 interface PageShellProps {
   active: "options" | "profiles" | "backup";
+  maxWidthClass?: string;
   children: ReactNode;
 }
 
-export function PageShell({ active, children }: PageShellProps) {
+export function PageShell({ active, maxWidthClass = "max-w-[720px]", children }: PageShellProps) {
   const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-paper text-ash-800 dark:bg-ink dark:text-ash-100">
-      <div className="mx-auto max-w-[720px] px-6 py-8">
+      <div className={`mx-auto ${maxWidthClass} px-6 py-8`}>
         <header className="mb-6 flex items-center gap-3">
           <a
             href={WEBSITE_URL}

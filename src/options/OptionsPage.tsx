@@ -28,20 +28,20 @@ export function OptionsPage() {
   };
 
   return (
-    <PageShell active="options">
-      <div className="space-y-5">
-        {/* Görünüm ve Dil Ayarları */}
-        <section className="rounded-xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
-          <div className="flex items-center justify-between border-b border-line px-5 py-3.5 dark:border-graphite-line">
-            <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-signal" />
-              <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ash-700 dark:text-ash-200">
+    <PageShell active="options" maxWidthClass="max-w-6xl">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+        {/* Satır 1, Sütun 1: Görünüm ve Dil Ayarları */}
+        <section className="flex flex-col h-full rounded-2xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
+          <div className="flex items-center justify-between border-b border-line px-6 py-4 dark:border-graphite-line">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-signal shadow-xs" />
+              <h2 className="font-display text-[13.5px] font-semibold uppercase tracking-[0.08em] text-ash-800 dark:text-ash-100">
                 {t("appearance")}
               </h2>
             </div>
             <SavedBadge visible={savedPing} label={t("saved")} />
           </div>
-          <div className="px-5 py-1">
+          <div className="flex-1 px-6 py-2 divide-y divide-line/60 dark:divide-graphite-line/60">
             {/* Bayraklı Dil Değiştirme */}
             <LanguageRow currentLang={language} onChange={handleLanguageChange} />
 
@@ -63,15 +63,15 @@ export function OptionsPage() {
           </div>
         </section>
 
-        {/* Liste Davranış Ayarları */}
-        <section className="rounded-xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
-          <div className="flex items-center gap-2 border-b border-line px-5 py-3.5 dark:border-graphite-line">
-            <span className="flex h-2 w-2 rounded-full bg-signal" />
-            <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ash-700 dark:text-ash-200">
+        {/* Satır 1, Sütun 2: Liste Davranış Ayarları */}
+        <section className="flex flex-col h-full rounded-2xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
+          <div className="flex items-center gap-2.5 border-b border-line px-6 py-4 dark:border-graphite-line">
+            <span className="flex h-2.5 w-2.5 rounded-full bg-signal shadow-xs" />
+            <h2 className="font-display text-[13.5px] font-semibold uppercase tracking-[0.08em] text-ash-800 dark:text-ash-100">
               {t("listBehavior")}
             </h2>
           </div>
-          <div className="px-5 py-1">
+          <div className="flex-1 px-6 py-2 divide-y divide-line/60 dark:divide-graphite-line/60">
             <SettingRow
               title={t("groupApps")}
               description={t("groupAppsDesc")}
@@ -99,15 +99,15 @@ export function OptionsPage() {
           </div>
         </section>
 
-        {/* Profil Ayarları */}
-        <section className="rounded-xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
-          <div className="flex items-center gap-2 border-b border-line px-5 py-3.5 dark:border-graphite-line">
-            <span className="flex h-2 w-2 rounded-full bg-signal" />
-            <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ash-700 dark:text-ash-200">
+        {/* Satır 2, Sütun 1: Profil Ayarları */}
+        <section className="flex flex-col h-full rounded-2xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
+          <div className="flex items-center gap-2.5 border-b border-line px-6 py-4 dark:border-graphite-line">
+            <span className="flex h-2.5 w-2.5 rounded-full bg-signal shadow-xs" />
+            <h2 className="font-display text-[13.5px] font-semibold uppercase tracking-[0.08em] text-ash-800 dark:text-ash-100">
               {t("profilesHeading")}
             </h2>
           </div>
-          <div className="px-5 py-1">
+          <div className="flex-1 px-6 py-2 divide-y divide-line/60 dark:divide-graphite-line/60">
             <SettingRow
               title={t("keepAlwaysOn")}
               description={t("keepAlwaysOnDesc")}
@@ -123,12 +123,12 @@ export function OptionsPage() {
           </div>
         </section>
 
-        {/* Hakkında & İletişim (Modern Kompakt Kart & Izgara Bağlantılar) */}
-        <section className="rounded-xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
-          <div className="flex items-center justify-between border-b border-line px-5 py-3.5 dark:border-graphite-line">
-            <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-signal" />
-              <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ash-700 dark:text-ash-200">
+        {/* Satır 2, Sütun 2: Hakkında & İletişim */}
+        <section className="flex flex-col h-full rounded-2xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
+          <div className="flex items-center justify-between border-b border-line px-6 py-4 dark:border-graphite-line">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-signal shadow-xs" />
+              <h2 className="font-display text-[13.5px] font-semibold uppercase tracking-[0.08em] text-ash-800 dark:text-ash-100">
                 {t("aboutAndSupport")}
               </h2>
             </div>
@@ -144,23 +144,23 @@ export function OptionsPage() {
             </a>
           </div>
 
-          <div className="p-4 space-y-3">
+          <div className="flex-1 p-5 space-y-4">
             {/* Geri Bildirim Satırı */}
-            <div className="flex items-center justify-between rounded-lg bg-ash-50/70 p-3.5 dark:bg-graphite-soft/40">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl bg-ash-50/80 p-4 dark:bg-graphite-soft/40">
               <div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   <MessageSquare className="h-4 w-4 text-signal-dark dark:text-signal" />
-                  <p className="text-[13.5px] font-medium text-ash-800 dark:text-ash-100">
+                  <p className="text-[13.5px] font-semibold text-ash-800 dark:text-ash-100">
                     {t("feedbackTitle")}
                   </p>
                 </div>
-                <p className="mt-0.5 text-[12px] text-ash-500 dark:text-ash-400">
+                <p className="mt-1 text-[12px] text-ash-500 dark:text-ash-400">
                   {t("feedbackDesc")}
                 </p>
               </div>
               <a
                 href={`mailto:${CONTACT_EMAIL}?subject=Extensity%2B%20Geri%20Bildirim%20/%20Öneri&body=Merhaba,%0D%0A%0D%0AUygulama%20hakkındaki%20görüşüm:%0D%0A`}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-white px-3 py-1.5 text-[12px] font-semibold text-ash-700 shadow-xs transition-colors hover:border-signal hover:text-signal dark:border-graphite-line dark:bg-graphite dark:text-ash-200"
+                className="inline-flex items-center justify-center gap-1.5 shrink-0 rounded-lg border border-line bg-white px-3.5 py-2 text-[12px] font-semibold text-ash-700 shadow-xs transition-colors hover:border-signal hover:text-signal dark:border-graphite-line dark:bg-graphite dark:text-ash-200"
               >
                 <Mail className="h-3.5 w-3.5 text-signal-dark dark:text-signal" />
                 <span>{t("sendEmail")}</span>
@@ -168,12 +168,12 @@ export function OptionsPage() {
             </div>
 
             {/* Hızlı Bağlantı Rozetleri (Izgara) */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <a
                 href={WEBSITE_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-between rounded-lg border border-line bg-white p-3 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
+                className="flex items-center justify-between rounded-xl border border-line bg-white p-3.5 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
               >
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4 text-signal" />
@@ -186,7 +186,7 @@ export function OptionsPage() {
                 href={PORTAL_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-between rounded-lg border border-line bg-white p-3 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
+                className="flex items-center justify-between rounded-xl border border-line bg-white p-3.5 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
               >
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4 text-signal" />
@@ -199,7 +199,7 @@ export function OptionsPage() {
                 href={REPO_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-between rounded-lg border border-line bg-white p-3 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
+                className="flex items-center justify-between rounded-xl border border-line bg-white p-3.5 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
               >
                 <div className="flex items-center gap-2">
                   <ExternalLink className="h-4 w-4 text-signal" />
