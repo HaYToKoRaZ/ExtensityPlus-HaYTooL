@@ -29,199 +29,187 @@ export function OptionsPage() {
 
   return (
     <PageShell active="options">
-      {/* Görünüm ve Dil Ayarları */}
-      <div className="rounded-lg border border-line bg-white shadow-panel dark:border-graphite-line dark:bg-graphite">
-        <div className="flex items-center justify-between border-b border-line px-5 py-3 dark:border-graphite-line">
-          <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.06em] text-ash-600 dark:text-ash-300">
-            {t("appearance")}
-          </h2>
-          <SavedBadge visible={savedPing} label={t("saved")} />
-        </div>
-        <div className="px-5">
-          {/* Bayraklı Dil Değiştirme */}
-          <LanguageRow currentLang={language} onChange={handleLanguageChange} />
+      <div className="space-y-5">
+        {/* Görünüm ve Dil Ayarları */}
+        <section className="rounded-xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
+          <div className="flex items-center justify-between border-b border-line px-5 py-3.5 dark:border-graphite-line">
+            <div className="flex items-center gap-2">
+              <span className="flex h-2 w-2 rounded-full bg-signal" />
+              <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ash-700 dark:text-ash-200">
+                {t("appearance")}
+              </h2>
+            </div>
+            <SavedBadge visible={savedPing} label={t("saved")} />
+          </div>
+          <div className="px-5 py-1">
+            {/* Bayraklı Dil Değiştirme */}
+            <LanguageRow currentLang={language} onChange={handleLanguageChange} />
 
-          {/* Tema Seçici */}
-          <ThemeRow value={options.theme} onChange={(v) => set("theme", v)} />
+            {/* Tema Seçici */}
+            <ThemeRow value={options.theme} onChange={(v) => set("theme", v)} />
 
-          <SettingRow
-            title={t("showHeader")}
-            description={t("showHeaderDesc")}
-            checked={options.showHeader}
-            onChange={(v) => set("showHeader", v)}
-          />
-          <SettingRow
-            title={t("showSearchBox")}
-            description={t("showSearchBoxDesc")}
-            checked={options.searchBox}
-            onChange={(v) => set("searchBox", v)}
-          />
-        </div>
-      </div>
+            <SettingRow
+              title={t("showHeader")}
+              description={t("showHeaderDesc")}
+              checked={options.showHeader}
+              onChange={(v) => set("showHeader", v)}
+            />
+            <SettingRow
+              title={t("showSearchBox")}
+              description={t("showSearchBoxDesc")}
+              checked={options.searchBox}
+              onChange={(v) => set("searchBox", v)}
+            />
+          </div>
+        </section>
 
-      {/* Liste Davranış Ayarları */}
-      <div className="mt-5 rounded-lg border border-line bg-white shadow-panel dark:border-graphite-line dark:bg-graphite">
-        <div className="border-b border-line px-5 py-3 dark:border-graphite-line">
-          <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.06em] text-ash-600 dark:text-ash-300">
-            {t("listBehavior")}
-          </h2>
-        </div>
-        <div className="px-5">
-          <SettingRow
-            title={t("groupApps")}
-            description={t("groupAppsDesc")}
-            checked={options.groupApps}
-            onChange={(v) => set("groupApps", v)}
-          />
-          <SettingRow
-            title={t("appsFirst")}
-            description={t("appsFirstDesc")}
-            checked={options.appsFirst}
-            onChange={(v) => set("appsFirst", v)}
-          />
-          <SettingRow
-            title={t("enabledFirst")}
-            description={t("enabledFirstDesc")}
-            checked={options.enabledFirst}
-            onChange={(v) => set("enabledFirst", v)}
-          />
-          <SettingRow
-            title={t("showGear")}
-            description={t("showGearDesc")}
-            checked={options.showExtensionOptions}
-            onChange={(v) => set("showExtensionOptions", v)}
-          />
-        </div>
-      </div>
+        {/* Liste Davranış Ayarları */}
+        <section className="rounded-xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
+          <div className="flex items-center gap-2 border-b border-line px-5 py-3.5 dark:border-graphite-line">
+            <span className="flex h-2 w-2 rounded-full bg-signal" />
+            <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ash-700 dark:text-ash-200">
+              {t("listBehavior")}
+            </h2>
+          </div>
+          <div className="px-5 py-1">
+            <SettingRow
+              title={t("groupApps")}
+              description={t("groupAppsDesc")}
+              checked={options.groupApps}
+              onChange={(v) => set("groupApps", v)}
+            />
+            <SettingRow
+              title={t("appsFirst")}
+              description={t("appsFirstDesc")}
+              checked={options.appsFirst}
+              onChange={(v) => set("appsFirst", v)}
+            />
+            <SettingRow
+              title={t("enabledFirst")}
+              description={t("enabledFirstDesc")}
+              checked={options.enabledFirst}
+              onChange={(v) => set("enabledFirst", v)}
+            />
+            <SettingRow
+              title={t("showGear")}
+              description={t("showGearDesc")}
+              checked={options.showExtensionOptions}
+              onChange={(v) => set("showExtensionOptions", v)}
+            />
+          </div>
+        </section>
 
-      {/* Profil Ayarları */}
-      <div className="mt-5 rounded-lg border border-line bg-white shadow-panel dark:border-graphite-line dark:bg-graphite">
-        <div className="border-b border-line px-5 py-3 dark:border-graphite-line">
-          <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.06em] text-ash-600 dark:text-ash-300">
-            {t("profilesHeading")}
-          </h2>
-        </div>
-        <div className="px-5">
-          <SettingRow
-            title={t("keepAlwaysOn")}
-            description={t("keepAlwaysOnDesc")}
-            checked={options.keepAlwaysOnWhenSwitchingOff}
-            onChange={(v) => set("keepAlwaysOnWhenSwitchingOff", v)}
-          />
-          <SettingRow
-            title={t("showReservedProfiles")}
-            description={t("showReservedProfilesDesc")}
-            checked={options.showReservedProfiles}
-            onChange={(v) => set("showReservedProfiles", v)}
-          />
-        </div>
-      </div>
+        {/* Profil Ayarları */}
+        <section className="rounded-xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
+          <div className="flex items-center gap-2 border-b border-line px-5 py-3.5 dark:border-graphite-line">
+            <span className="flex h-2 w-2 rounded-full bg-signal" />
+            <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ash-700 dark:text-ash-200">
+              {t("profilesHeading")}
+            </h2>
+          </div>
+          <div className="px-5 py-1">
+            <SettingRow
+              title={t("keepAlwaysOn")}
+              description={t("keepAlwaysOnDesc")}
+              checked={options.keepAlwaysOnWhenSwitchingOff}
+              onChange={(v) => set("keepAlwaysOnWhenSwitchingOff", v)}
+            />
+            <SettingRow
+              title={t("showReservedProfiles")}
+              description={t("showReservedProfilesDesc")}
+              checked={options.showReservedProfiles}
+              onChange={(v) => set("showReservedProfiles", v)}
+            />
+          </div>
+        </section>
 
-      {/* Hakkında, Tıklanabilir Sürüm & İletişim (Öneri & Şikayet) */}
-      <div className="mt-5 rounded-lg border border-line bg-white shadow-panel dark:border-graphite-line dark:bg-graphite">
-        <div className="border-b border-line px-5 py-3 dark:border-graphite-line">
-          <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.06em] text-ash-600 dark:text-ash-300">
-            {t("aboutAndSupport")}
-          </h2>
-        </div>
-        <div className="divide-y divide-line px-5 dark:divide-graphite-line">
-          {/* Tıklanabilir Sürüm Bilgisi (Web Sitesine Gider) */}
-          <div className="flex items-center justify-between py-4">
-            <div>
-              <p className="text-[13.5px] font-medium text-ash-800 dark:text-ash-100">
-                {t("versionLabel")}
-              </p>
-              <p className="mt-0.5 text-[12.5px] text-ash-500 dark:text-ash-400">
-                {t("visitWebsite")}
-              </p>
+        {/* Hakkında & İletişim (Modern Kompakt Kart & Izgara Bağlantılar) */}
+        <section className="rounded-xl border border-line bg-white p-1 shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
+          <div className="flex items-center justify-between border-b border-line px-5 py-3.5 dark:border-graphite-line">
+            <div className="flex items-center gap-2">
+              <span className="flex h-2 w-2 rounded-full bg-signal" />
+              <h2 className="font-display text-[13px] font-semibold uppercase tracking-[0.08em] text-ash-700 dark:text-ash-200">
+                {t("aboutAndSupport")}
+              </h2>
             </div>
             <a
               href={WEBSITE_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-pill border border-line bg-ash-50 px-3 py-1 text-[12.5px] font-semibold text-signal-dark transition-all hover:border-signal hover:bg-signal hover:text-white dark:border-graphite-line dark:bg-graphite-soft dark:text-signal dark:hover:bg-signal dark:hover:text-white"
+              title={t("visitWebsite")}
+              className="inline-flex items-center gap-1.5 rounded-pill border border-line bg-ash-50 px-3 py-1 text-[12px] font-semibold text-signal-dark transition-all hover:border-signal hover:bg-signal hover:text-white dark:border-graphite-line dark:bg-graphite-soft dark:text-signal dark:hover:bg-signal dark:hover:text-white"
             >
               <span>v{APP_VERSION}</span>
               <ExternalLink className="h-3 w-3" />
             </a>
           </div>
 
-          {/* Tıklanabilir Öneri & Şikayet (Mail Açar) */}
-          <div className="flex items-center justify-between py-4">
-            <div>
-              <div className="flex items-center gap-1.5">
-                <MessageSquare className="h-4 w-4 text-signal-dark dark:text-signal" />
-                <p className="text-[13.5px] font-medium text-ash-800 dark:text-ash-100">
-                  {t("feedbackTitle")}
+          <div className="p-4 space-y-3">
+            {/* Geri Bildirim Satırı */}
+            <div className="flex items-center justify-between rounded-lg bg-ash-50/70 p-3.5 dark:bg-graphite-soft/40">
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <MessageSquare className="h-4 w-4 text-signal-dark dark:text-signal" />
+                  <p className="text-[13.5px] font-medium text-ash-800 dark:text-ash-100">
+                    {t("feedbackTitle")}
+                  </p>
+                </div>
+                <p className="mt-0.5 text-[12px] text-ash-500 dark:text-ash-400">
+                  {t("feedbackDesc")}
                 </p>
               </div>
-              <p className="mt-0.5 text-[12.5px] text-ash-500 dark:text-ash-400">
-                {t("feedbackDesc")}
-              </p>
+              <a
+                href={`mailto:${CONTACT_EMAIL}?subject=Extensity%2B%20Geri%20Bildirim%20/%20Öneri&body=Merhaba,%0D%0A%0D%0AUygulama%20hakkındaki%20görüşüm:%0D%0A`}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-white px-3 py-1.5 text-[12px] font-semibold text-ash-700 shadow-xs transition-colors hover:border-signal hover:text-signal dark:border-graphite-line dark:bg-graphite dark:text-ash-200"
+              >
+                <Mail className="h-3.5 w-3.5 text-signal-dark dark:text-signal" />
+                <span>{t("sendEmail")}</span>
+              </a>
             </div>
-            <a
-              href={`mailto:${CONTACT_EMAIL}?subject=Extensity%2B%20Geri%20Bildirim%20/%20Öneri&body=Merhaba,%0D%0A%0D%0AUygulama%20hakkındaki%20görüşüm:%0D%0A`}
-              className="inline-flex items-center gap-1.5 rounded-pill border border-line bg-ash-50 px-3 py-1.5 text-[12.5px] font-medium text-ash-700 transition-colors hover:border-ash-300 hover:bg-white dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-200 dark:hover:bg-graphite-line"
-            >
-              <Mail className="h-3.5 w-3.5 text-signal-dark dark:text-signal" />
-              <span>{t("sendEmail")}</span>
-            </a>
-          </div>
 
-          {/* Resmi Web Sitesi Bağlantısı */}
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-1.5">
-              <Globe className="h-4 w-4 text-signal-dark dark:text-signal" />
-              <p className="text-[12.5px] text-ash-500 dark:text-ash-400">
-                {t("officialWebsite")}
-              </p>
+            {/* Hızlı Bağlantı Rozetleri (Izgara) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+              <a
+                href={WEBSITE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between rounded-lg border border-line bg-white p-3 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
+              >
+                <div className="flex items-center gap-2">
+                  <Globe className="h-4 w-4 text-signal" />
+                  <span>{t("officialWebsite")}</span>
+                </div>
+                <ExternalLink className="h-3 w-3 text-ash-400" />
+              </a>
+
+              <a
+                href={PORTAL_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between rounded-lg border border-line bg-white p-3 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
+              >
+                <div className="flex items-center gap-2">
+                  <Globe className="h-4 w-4 text-signal" />
+                  <span>{t("devPortal")}</span>
+                </div>
+                <ExternalLink className="h-3 w-3 text-ash-400" />
+              </a>
+
+              <a
+                href={REPO_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between rounded-lg border border-line bg-white p-3 text-[12px] font-medium text-ash-700 transition-all hover:border-signal hover:text-signal hover:shadow-xs dark:border-graphite-line dark:bg-graphite-soft/30 dark:text-ash-300"
+              >
+                <div className="flex items-center gap-2">
+                  <ExternalLink className="h-4 w-4 text-signal" />
+                  <span>{t("githubRepo")}</span>
+                </div>
+                <ExternalLink className="h-3 w-3 text-ash-400" />
+              </a>
             </div>
-            <a
-              href={WEBSITE_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-[12.5px] font-medium text-ash-600 hover:text-signal-dark dark:text-ash-300 dark:hover:text-signal"
-            >
-              <span>haytokoraz.github.io/ExtensityPlus-HaYTooL</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
           </div>
-
-          {/* HaYTooL Portal Bağlantısı */}
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-1.5">
-              <Globe className="h-4 w-4 text-signal-dark dark:text-signal" />
-              <p className="text-[12.5px] text-ash-500 dark:text-ash-400">
-                {t("devPortal")}
-              </p>
-            </div>
-            <a
-              href={PORTAL_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-[12.5px] font-medium text-ash-600 hover:text-signal-dark dark:text-ash-300 dark:hover:text-signal"
-            >
-              <span>haytokoraz.github.io</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
-          </div>
-
-          {/* GitHub Repo Bağlantısı */}
-          <div className="flex items-center justify-between py-4">
-            <p className="text-[12.5px] text-ash-500 dark:text-ash-400">
-              {t("githubRepo")}
-            </p>
-            <a
-              href={REPO_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-[12.5px] font-medium text-ash-600 hover:text-signal-dark dark:text-ash-300 dark:hover:text-signal"
-            >
-              <span>HaYToKoRaZ/ExtensityPlus-HaYTooL</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
-          </div>
-        </div>
+        </section>
       </div>
 
       {!loaded && (
@@ -264,8 +252,9 @@ function LanguageRow({
               aria-label={opt.label}
               onClick={() => onChange(opt.code)}
               className={`
-                relative flex h-10 w-10 items-center justify-center rounded-full border text-xl
+                relative flex h-10 w-10 items-center justify-center rounded-full border text-xl cursor-pointer
                 transition-all duration-200 shadow-sm
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 dark:focus-visible:ring-offset-graphite
                 hover:scale-110 active:scale-95
                 ${
                   isSelected
@@ -320,9 +309,10 @@ function ThemeRow({
           type="button"
           onClick={() => setOpen((prev) => !prev)}
           className={`
-            flex items-center gap-2 rounded-pill border px-3.5 py-1.5 text-[13px] font-medium
+            flex items-center gap-2 rounded-pill border px-3.5 py-1.5 text-[13px] font-medium cursor-pointer
             transition-all duration-150 shadow-sm
             border-line bg-white hover:border-ash-300 dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal
             ${open ? "ring-2 ring-signal/50 border-signal" : ""}
           `}
         >

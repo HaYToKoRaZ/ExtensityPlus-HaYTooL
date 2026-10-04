@@ -31,14 +31,15 @@ export function ProfileChips({ profiles, activeProfile, onSelect }: ProfileChips
             type="button"
             onClick={() => onSelect(profile)}
             className={`
-              inline-flex items-center gap-1.5 rounded-pill border px-2.5 py-1 text-[12px]
-              transition-colors duration-100
+              inline-flex items-center gap-1.5 rounded-pill border px-2.5 py-1 text-[12px] cursor-pointer
+              transition-all duration-150 active:scale-95
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal
               ${
                 active
-                  ? "border-signal bg-signal/10 text-signal-dark dark:text-signal-dark"
-                  : "border-line bg-white text-ash-600 hover:border-ash-300 dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-300 dark:hover:border-ash-500"
+                  ? "border-signal bg-signal/15 text-signal-dark dark:text-signal shadow-sm font-medium"
+                  : "border-line bg-white text-ash-600 hover:border-ash-300 hover:bg-ash-50 dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-300 dark:hover:border-ash-500"
               }
-              ${isReserved(profile.name) ? "font-medium" : ""}
+              ${isReserved(profile.name) ? "font-semibold" : ""}
             `}
           >
             <Icon className="h-3 w-3" />

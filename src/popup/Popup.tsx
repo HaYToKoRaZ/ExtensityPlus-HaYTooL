@@ -177,7 +177,7 @@ export function Popup() {
   };
 
   return (
-    <div className="flex w-[360px] flex-col bg-paper text-ash-800 dark:bg-ink dark:text-ash-100">
+    <div className="flex w-[395px] flex-col bg-paper text-ash-800 dark:bg-ink dark:text-ash-100">
       {options.showHeader && (
         <Header
           tripped={isTripped}

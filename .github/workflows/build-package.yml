@@ -63,15 +63,16 @@ jobs:
           name: "Extensity+ HaYTooL ${{ steps.get_version.outputs.TAG }}"
           body: |
             ### 🚀 Extensity+ HaYTooL ${{ steps.get_version.outputs.TAG }}
-            
+
             Tarayıcınıza yüklemek için aşağıdaki ZIP dosyasını indirip çıkartabilir ya da doğrudan mağazalara yükleyebilirsiniz.
 
-            #### 📦 İndirilebilir Paketler:
+            #### 📦 İndirilebilir Paket:
             - **${{ steps.create_zip.outputs.ZIP_NAME }}**
 
             ---
             *Otomatik GitHub Actions tarafından derlenmiş ve yayınlanmıştır.*
           draft: false
           prerelease: false
+          make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

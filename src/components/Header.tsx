@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Cloud, Cog, Puzzle, UserRound, Zap } from "lucide-react";
-import { APP_NAME } from "@/lib/branding";
+import { APP_NAME, WEBSITE_URL } from "@/lib/branding";
 import { useTranslation } from "@/hooks/useTranslation";
 
 interface HeaderProps {
@@ -27,11 +27,25 @@ export function Header({
   const { t } = useTranslation();
 
   return (
-    <header className="flex items-center gap-2 border-b border-line px-3 py-2.5 dark:border-graphite-line">
-      <img src="/images/icon48.png" alt="" width={20} height={20} className="rounded-full shadow-sm" />
-      <h1 className="font-display text-[14px] font-semibold tracking-tight text-ash-900 dark:text-white">
-        {APP_NAME}
-      </h1>
+    <header className="flex items-center gap-2 border-b border-line px-3 py-2.5 dark:border-graphite-line bg-white/70 dark:bg-graphite/70 backdrop-blur-sm">
+      <a
+        href={WEBSITE_URL}
+        target="_blank"
+        rel="noreferrer"
+        title="Extensity+ HaYTooL Resmi Web Sitesi"
+        className="group flex items-center gap-2 rounded-md p-0.5 -m-0.5 cursor-pointer shrink-0 transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+      >
+        <img
+          src="/images/icon48.png"
+          alt=""
+          width={20}
+          height={20}
+          className="rounded-full shadow-sm transition-transform duration-200 group-hover:scale-110 shrink-0"
+        />
+        <h1 className="font-display text-[14px] font-semibold tracking-tight text-ash-900 whitespace-nowrap transition-colors group-hover:text-signal dark:text-white">
+          {APP_NAME}
+        </h1>
+      </a>
 
       <div className="ml-auto flex items-center gap-0.5">
         <IconLink label={t("options")} onClick={onOpenOptions} icon={Cog} />
@@ -51,12 +65,13 @@ export function Header({
           aria-pressed={tripped}
           title={tripped ? t("restoreExtensions") : t("turnAllOff")}
           className={`
-            ml-1 inline-flex items-center gap-1 rounded-pill border px-2 py-1 text-[11px] font-semibold
-            transition-colors duration-150
+            ml-1 inline-flex items-center gap-1 rounded-pill border px-2.5 py-1 text-[11px] font-semibold cursor-pointer
+            transition-all duration-150 active:scale-95
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal
             ${
               tripped
-                ? "border-warn/40 bg-warn/10 text-warn"
-                : "border-signal/40 bg-signal/10 text-signal-dark"
+                ? "border-warn/40 bg-warn/15 text-warn shadow-sm"
+                : "border-signal/40 bg-signal/15 text-signal-dark dark:text-signal shadow-sm"
             }
           `}
         >
@@ -87,7 +102,7 @@ function IconLink({
       title={label}
       aria-label={label}
       onClick={onClick}
-      className="flex items-center justify-center rounded-sm p-1.5 text-ash-500 transition-colors hover:bg-ash-100 hover:text-ash-800 dark:text-ash-400 dark:hover:bg-graphite-soft dark:hover:text-ash-100"
+      className="flex items-center justify-center rounded-md p-1.5 text-ash-500 cursor-pointer transition-all duration-150 hover:bg-ash-100 hover:text-ash-800 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal dark:text-ash-400 dark:hover:bg-graphite-soft dark:hover:text-ash-100"
     >
       {avatarUrl && !imgError ? (
         <img

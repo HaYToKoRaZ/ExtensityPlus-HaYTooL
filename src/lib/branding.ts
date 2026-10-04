@@ -1,5 +1,11 @@
+// Versiyonu doğrudan manifest'ten dinamik okur; manuel elle güncellemeye gerek bırakmaz
+const runtimeVersion =
+  typeof chrome !== "undefined" && chrome.runtime?.getManifest
+    ? chrome.runtime.getManifest().version
+    : "3.5";
+
 export const APP_NAME = "Extensity+ HaYTooL";
-export const APP_VERSION = "3.1.4";
+export const APP_VERSION = runtimeVersion;
 export const APP_TAGLINE = "Quickly enable, disable, and organize your browser extensions.";
 export const REPO_URL = "https://github.com/HaYToKoRaZ/ExtensityPlus-HaYTooL";
 export const WEBSITE_URL = "https://haytokoraz.github.io/ExtensityPlus-HaYTooL/";

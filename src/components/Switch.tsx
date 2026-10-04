@@ -23,8 +23,9 @@ export function Switch({ checked, onChange, label, size = "md", disabled }: Swit
         onChange(!checked);
       }}
       className={`
-        relative inline-flex shrink-0 items-center rounded-pill border
+        relative inline-flex shrink-0 items-center rounded-pill border cursor-pointer
         transition-colors duration-150 ease-out
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 dark:focus-visible:ring-offset-graphite
         disabled:cursor-not-allowed disabled:opacity-40
         ${dims}
         ${checked ? "bg-signal border-signal" : "bg-ash-200 border-ash-300 dark:bg-graphite-line dark:border-graphite-line"}

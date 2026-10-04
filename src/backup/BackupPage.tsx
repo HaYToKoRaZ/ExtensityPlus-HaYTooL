@@ -7,7 +7,6 @@ import {
   Check,
   RefreshCw,
   ExternalLink,
-  History,
   Eye,
   EyeOff,
   AlertCircle,
@@ -18,6 +17,7 @@ import {
 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { MissingExtensionsModal } from "@/components/MissingExtensionsModal";
+import { CloudBackupsModal, type SelectedCloudBackup } from "@/components/CloudBackupsModal";
 import { useTheme } from "@/hooks/useTheme";
 import { useOptions } from "@/hooks/useOptions";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -34,16 +34,13 @@ import {
 } from "@/lib/backup";
 import {
   createBackupGist,
-  fetchGistContent,
   findExistingBackupGist,
-  getGistCommitHistory,
   getGistVault,
   pushBackupToGist,
   verifyGitHubToken,
   STORAGE_KEY_TOKEN,
   STORAGE_KEY_GIST_ID,
   STORAGE_KEY_USER_PROFILE,
-  type GistCommitInfo,
   type GistVault,
   type GitHubUserProfile,
 } from "@/lib/gist-sync";
@@ -93,13 +90,9 @@ export function BackupPage() {
   const [cloudPushing, setCloudPushing] = useState(false);
   const [cloudSuccessMsg, setCloudSuccessMsg] = useState<string | null>(null);
 
-  // Cloud Pull & Time Machine State
-  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
-  const [selectedSlot, setSelectedSlot] = useState<string>("");
-  const [commitHistory, setCommitHistory] = useState<GistCommitInfo[]>([]);
-  const [selectedCommit, setSelectedCommit] = useState<string>("");
-  const [showTimeMachine, setShowTimeMachine] = useState(false);
-  const [historyLoading, setHistoryLoading] = useState(false);
+  // Cloud Pull Modal State
+  const [showCloudBackupsModal, setShowCloudBackupsModal] = useState(false);
+  const [stagedSourceLabel, setStagedSourceLabel] = useState<string | null>(null);
 
   // Diff & Preview State
   const [stagedBackup, setStagedBackup] = useState<BackupPayload | null>(null);
@@ -168,13 +161,6 @@ export function BackupPage() {
       if (vault) {
         setActiveGist(vault);
         await storageSet(STORAGE_KEY_GIST_ID, vault.id, true);
-
-        // Dosya / Slot listesini hazırla
-        const files = Object.keys(vault.files || {});
-        setAvailableSlots(files);
-        if (files.length > 0) {
-          setSelectedSlot(files[0]);
-        }
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Failed to connect to GitHub";
@@ -209,9 +195,19 @@ export function BackupPage() {
       const data = await exportBackupData();
       const rawJson = JSON.stringify(data, null, 2);
 
-      // Slot dosya ismi (ör. "helium-work.json" veya "extensityplus-backup.json")
-      const cleanSlot = (slotName.trim().replace(/[^a-zA-Z0-9_-]/g, "-") || "backup").toLowerCase();
-      const filename = cleanSlot.endsWith(".json") ? cleanSlot : `${cleanSlot}.json`;
+      // Benzersiz isim ve üzerine yazmayı önleme: Tarih ve saat damgasını EN ÖNE al
+      const now = new Date();
+      const pad = (n: number) => String(n).padStart(2, "0");
+      const dateTag = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}`;
+
+      // Slot dosya ismi (ör. "2026-10-04_21-00_edge-windows.json")
+      let cleanSlot = (slotName.trim().replace(/[^a-zA-Z0-9_.-]/g, "-") || "backup").toLowerCase();
+      if (cleanSlot.endsWith(".json")) {
+        cleanSlot = cleanSlot.slice(0, -5);
+      }
+
+      // Tarih en başta olacak şekilde dosya adı oluştur
+      const filename = `${dateTag}_${cleanSlot}.json`;
 
       let updatedVault: GistVault;
       if (activeGist) {
@@ -223,9 +219,8 @@ export function BackupPage() {
       setActiveGist(updatedVault);
       await storageSet(STORAGE_KEY_GIST_ID, updatedVault.id, true);
 
-      const files = Object.keys(updatedVault.files || {});
-      setAvailableSlots(files);
-      setSelectedSlot(filename);
+      // Bir sonraki yedek için slot adını güncel tut (Tarih başta)
+      setSlotName(`${dateTag} - ${getDefaultSlotName()}`);
 
       setCloudSuccessMsg(t("pushSuccess"));
       setTimeout(() => setCloudSuccessMsg(null), 3000);
@@ -236,42 +231,18 @@ export function BackupPage() {
     }
   };
 
-  // Buluttan Yedeği Çekme ve Fark Hazırlama (Stage & Diff)
-  const handleStageCloudBackup = async (filename: string, commitSha?: string) => {
-    if (!tokenInput || !activeGist) return;
-
+  // Bulut Yedekleri Modalinden Seçim Yapıldığında
+  const handleSelectCloudBackup = async (selected: SelectedCloudBackup) => {
     setRestoring(true);
     try {
-      const content = await fetchGistContent(tokenInput, activeGist.id, filename, commitSha);
-      const parsed = validateAndParseBackup(content);
-      const diff = await computeBackupDiff(parsed);
-
-      setStagedBackup(parsed);
+      const diff = await computeBackupDiff(selected.payload);
+      setStagedBackup(selected.payload);
       setDiffSummary(diff);
+      setStagedSourceLabel(selected.sourceLabel);
     } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : "Failed to load cloud backup");
+      alert(err instanceof Error ? err.message : "Failed to parse selected backup");
     } finally {
       setRestoring(false);
-    }
-  };
-
-  // Zaman Makinesi Commit Listesini Çekme
-  const handleToggleTimeMachine = async () => {
-    if (!tokenInput || !activeGist) return;
-
-    if (!showTimeMachine) {
-      setHistoryLoading(true);
-      try {
-        const history = await getGistCommitHistory(tokenInput, activeGist.id);
-        setCommitHistory(history);
-        setShowTimeMachine(true);
-      } catch (err: unknown) {
-        alert(err instanceof Error ? err.message : "Failed to load history");
-      } finally {
-        setHistoryLoading(false);
-      }
-    } else {
-      setShowTimeMachine(false);
     }
   };
 
@@ -332,7 +303,7 @@ export function BackupPage() {
   return (
     <PageShell active="backup">
       {/* 💡 FORMAT / YENİ CİHAZ BİLGİLENDİRME REHBERİ */}
-      <div className="mb-6 rounded-2xl border border-sky-500/20 bg-sky-500/5 p-5 shadow-sm dark:border-sky-400/20 dark:bg-sky-400/5">
+      <section className="mb-6 rounded-xl border border-sky-500/25 bg-sky-500/5 p-4.5 shadow-sm dark:border-sky-400/25 dark:bg-sky-400/5">
         <div className="flex items-start gap-3.5">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-500/15 text-sky-600 dark:text-sky-400">
             <HelpCircle className="h-5 w-5" />
@@ -346,12 +317,13 @@ export function BackupPage() {
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* 1. GITHUB BULUT SENKRONİZASYONU KARTI */}
-      <div className="rounded-2xl border border-line bg-white shadow-panel dark:border-graphite-line dark:bg-graphite">
+      <section className="rounded-xl border border-line bg-white shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
         <div className="flex items-center justify-between border-b border-line px-6 py-4 dark:border-graphite-line">
           <div className="flex items-center gap-2.5">
+            <span className="flex h-2 w-2 rounded-full bg-signal" />
             <Cloud className="h-5 w-5 text-signal" />
             <h3 className="font-display text-[14px] font-bold uppercase tracking-wider text-ash-800 dark:text-ash-100">
               {t("cloudSyncSection")}
@@ -498,90 +470,57 @@ export function BackupPage() {
                 )}
               </div>
 
-              {/* Alt Bölüm B: Buluttan Geri Yükleme & Çoklu Slot & Zaman Makinesi */}
-              <div className="rounded-xl border border-line p-4 dark:border-graphite-line space-y-3">
+              {/* Alt Bölüm B: Buluttan Geri Yükleme & Liste Modalı */}
+              <div className="rounded-xl border border-line p-5 dark:border-graphite-line space-y-3 bg-ash-50/30 dark:bg-graphite-soft/20">
                 <div className="flex items-center justify-between flex-wrap gap-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-ash-700 dark:text-ash-200">
-                    {t("pullFromCloudSection")}
-                  </h4>
-                  <button
-                    type="button"
-                    onClick={handleToggleTimeMachine}
-                    disabled={!activeGist || historyLoading}
-                    className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/20 transition-colors"
-                  >
-                    <History className="h-3.5 w-3.5" />
-                    <span>{t("timeMachineBtn")}</span>
-                  </button>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-ash-700 dark:text-ash-200">
+                      {t("pullFromCloudSection")}
+                    </h4>
+                    <p className="text-[11px] text-ash-400 mt-0.5">
+                      Gist kasanızdaki cihaz slotlarını ve Zaman Makinesi geçmişini tek pencerede görüntüleyin.
+                    </p>
+                  </div>
+                  {activeGist && (
+                    <span className="rounded-full bg-signal/10 px-2.5 py-0.5 text-[11px] font-semibold text-signal">
+                      {Object.keys(activeGist.files || {}).length} Slot Mevcut
+                    </span>
+                  )}
                 </div>
 
-                {availableSlots.length > 0 ? (
-                  <div className="flex flex-col sm:flex-row gap-2.5">
-                    <select
-                      value={selectedSlot}
-                      onChange={(e) => {
-                        setSelectedSlot(e.target.value);
-                        setSelectedCommit("");
-                      }}
-                      className="flex-1 rounded-xl border border-line bg-ash-50/50 px-3.5 py-2 text-xs text-ash-800 focus:border-signal focus:outline-none dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100"
-                    >
-                      {availableSlots.map((file) => (
-                        <option key={file} value={file}>
-                          📦 {file}
-                        </option>
-                      ))}
-                    </select>
-
-                    <button
-                      type="button"
-                      onClick={() => void handleStageCloudBackup(selectedSlot, selectedCommit)}
-                      disabled={restoring}
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-5 py-2 text-xs font-semibold text-ash-800 hover:border-signal hover:text-signal dark:border-graphite-line dark:bg-graphite dark:text-ash-100 transition-colors"
-                    >
-                      {restoring && <RefreshCw className="h-3.5 w-3.5 animate-spin" />}
-                      <span>{t("selectBackupSlot")} & {t("previewTitle")}</span>
-                    </button>
-                  </div>
-                ) : (
-                  <p className="text-xs text-ash-400 italic">{t("noGistFound")}</p>
-                )}
-
-                {/* Zaman Makinesi Açılır Paneli */}
-                {showTimeMachine && (
-                  <div className="mt-3 rounded-xl border border-purple-500/20 bg-purple-500/5 p-3.5 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-purple-700 dark:text-purple-300">
-                        {t("timeMachineTitle")}
-                      </span>
-                    </div>
-                    <select
-                      value={selectedCommit}
-                      onChange={(e) => setSelectedCommit(e.target.value)}
-                      className="w-full rounded-lg border border-line bg-white px-3 py-1.5 text-xs text-ash-800 dark:border-graphite-line dark:bg-graphite dark:text-ash-100"
-                    >
-                      <option value="">-- En Son Güncel Sürüm (Latest) --</option>
-                      {commitHistory.map((c) => (
-                        <option key={c.version} value={c.version}>
-                          🕒 {new Date(c.committedAt).toLocaleString()} ({c.version.slice(0, 7)})
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setShowCloudBackupsModal(true)}
+                    disabled={!activeGist || restoring}
+                    className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl bg-signal px-5 py-2.5 text-xs font-bold text-white shadow-md hover:bg-signal-dark active:scale-95 disabled:opacity-50 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                  >
+                    <Cloud className="h-4 w-4" />
+                    <span>☁️ Eski Yedeklerin Listesini Aç & Seç</span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
         </div>
-      </div>
+      </section>
 
       {/* 2. FARK ÖNİZLEME & GERİ YÜKLEME KARTI (DIFF PREVIEW) */}
       {stagedBackup && diffSummary && (
-        <div className="mt-6 rounded-2xl border-2 border-signal/40 bg-white p-6 shadow-xl dark:border-signal/30 dark:bg-graphite animate-fade-in">
+        <section className="mt-6 rounded-xl border-2 border-signal/40 bg-white p-6 shadow-md dark:border-signal/30 dark:bg-graphite animate-fade-in">
           <div className="flex items-center justify-between border-b border-line pb-4 dark:border-graphite-line">
             <div>
-              <h3 className="font-display text-base font-bold text-ash-900 dark:text-white">
-                {t("diffTitle")}
-              </h3>
+              <div className="flex items-center gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-signal" />
+                <h3 className="font-display text-base font-bold text-ash-900 dark:text-white">
+                  {t("diffTitle")}
+                </h3>
+                {stagedSourceLabel && (
+                  <span className="rounded-full bg-signal/15 px-2.5 py-0.5 text-[11px] font-semibold text-signal">
+                    {stagedSourceLabel}
+                  </span>
+                )}
+              </div>
               <p className="text-xs text-ash-400 mt-0.5">
                 {t("previewDate")}: {new Date(stagedBackup.exportedAt).toLocaleString()}
               </p>
@@ -591,7 +530,7 @@ export function BackupPage() {
               type="button"
               onClick={() => void handleConfirmRestore()}
               disabled={restoring}
-              className="inline-flex items-center gap-2 rounded-xl bg-signal px-6 py-2.5 text-xs font-bold text-white shadow-md hover:bg-signal-dark active:scale-95 disabled:opacity-50 transition-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-signal px-6 py-2.5 text-xs font-bold text-white shadow-md hover:bg-signal-dark active:scale-95 disabled:opacity-50 cursor-pointer transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
             >
               {restoring ? <RefreshCw className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
               <span>{restoring ? t("restoring") : t("restoreBtn")}</span>
@@ -643,12 +582,13 @@ export function BackupPage() {
               <span>{t("restoreSuccess")}</span>
             </div>
           )}
-        </div>
+        </section>
       )}
 
       {/* 3. YEREL DOSYA & PANO YEDEKLEME KARTI (OFFLINE) */}
-      <div className="mt-6 rounded-2xl border border-line bg-white shadow-panel dark:border-graphite-line dark:bg-graphite">
+      <section className="mt-6 rounded-xl border border-line bg-white shadow-sm transition-shadow hover:shadow-md dark:border-graphite-line dark:bg-graphite">
         <div className="border-b border-line px-6 py-4 dark:border-graphite-line flex items-center gap-2.5">
+          <span className="flex h-2 w-2 rounded-full bg-signal" />
           <HardDrive className="h-5 w-5 text-ash-500 dark:text-ash-300" />
           <h3 className="font-display text-[14px] font-bold uppercase tracking-wider text-ash-800 dark:text-ash-100">
             {t("localBackupSection")}
@@ -668,7 +608,7 @@ export function BackupPage() {
                 const data = await exportBackupData();
                 downloadBackupFile(data);
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-ash-50/70 p-3.5 text-xs font-semibold text-ash-800 hover:border-signal hover:bg-white dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100 dark:hover:bg-graphite transition-all"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-ash-50/70 p-3.5 text-xs font-semibold text-ash-800 hover:border-signal hover:bg-white active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100 dark:hover:bg-graphite transition-all shadow-xs"
             >
               <Download className="h-4 w-4 text-signal" />
               <span>{t("downloadJsonBtn")}</span>
@@ -683,12 +623,11 @@ export function BackupPage() {
                 setCopiedPing(true);
                 setTimeout(() => setCopiedPing(false), 2000);
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-ash-50/70 p-3.5 text-xs font-semibold text-ash-800 hover:border-signal hover:bg-white dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100 dark:hover:bg-graphite transition-all"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-ash-50/70 p-3.5 text-xs font-semibold text-ash-800 hover:border-signal hover:bg-white active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100 dark:hover:bg-graphite transition-all shadow-xs"
             >
-              {copiedPing ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4 text-ash-400" />}
+              {copiedPing ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4 text-signal" />}
               <span>{copiedPing ? t("copiedToClipboard") : t("copyClipboardBtn")}</span>
             </button>
-
             {/* Dosyadan Yükle */}
             <div>
               <input
@@ -701,7 +640,7 @@ export function BackupPage() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-ash-50/70 p-3.5 text-xs font-semibold text-ash-800 hover:border-signal hover:bg-white dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100 dark:hover:bg-graphite transition-all"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-ash-50/70 p-3.5 text-xs font-semibold text-ash-800 hover:border-signal hover:bg-white active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100 dark:hover:bg-graphite transition-all shadow-xs"
               >
                 <Upload className="h-4 w-4 text-purple-500" />
                 <span>{t("importJsonBtn")}</span>
@@ -712,14 +651,14 @@ export function BackupPage() {
             <button
               type="button"
               onClick={() => setShowPasteModal(true)}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-ash-50/70 p-3.5 text-xs font-semibold text-ash-800 hover:border-signal hover:bg-white dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100 dark:hover:bg-graphite transition-all"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-ash-50/70 p-3.5 text-xs font-semibold text-ash-800 hover:border-signal hover:bg-white active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal dark:border-graphite-line dark:bg-graphite-soft dark:text-ash-100 dark:hover:bg-graphite transition-all shadow-xs"
             >
               <Copy className="h-4 w-4 text-amber-500" />
               <span>{t("pasteClipboardBtn")}</span>
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Panodan JSON Yapıştırma Modalı */}
       {showPasteModal && (
@@ -760,6 +699,17 @@ export function BackupPage() {
         <MissingExtensionsModal
           missingItems={missingItems}
           onClose={() => setShowMissingModal(false)}
+        />
+      )}
+
+      {/* Bulut Yedekleri & Sürüm Geçmişi Seçim Modalı */}
+      {showCloudBackupsModal && activeGist && tokenInput && (
+        <CloudBackupsModal
+          token={tokenInput}
+          vault={activeGist}
+          onSelectBackup={(selected) => void handleSelectCloudBackup(selected)}
+          onVaultUpdated={(updatedVault) => setActiveGist(updatedVault)}
+          onClose={() => setShowCloudBackupsModal(false)}
         />
       )}
     </PageShell>

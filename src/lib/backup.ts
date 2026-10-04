@@ -101,11 +101,42 @@ export function validateAndParseBackup(rawJson: string): BackupPayload {
     throw new Error("This file is not a valid Extensity+ HaYTooL backup.");
   }
 
-  if (!Array.isArray(obj.extensions) || !Array.isArray(obj.profiles)) {
+  // extensions dizisi yoksa veya dizi değilse güvenli boş dizi ata
+  const extensions: BackupExtensionItem[] = Array.isArray(obj.extensions)
+    ? (obj.extensions as BackupExtensionItem[])
+    : [];
+
+  // profiles nesnesi doğrulaması: Nesne veya dizi formatını destekle
+  let profiles: Record<string, string[]> = {};
+  if (obj.profiles && typeof obj.profiles === "object" && !Array.isArray(obj.profiles)) {
+    profiles = obj.profiles as Record<string, string[]>;
+  } else if (Array.isArray(obj.profiles)) {
+    // Gelecekte/geçmişte dizi olarak gelmişse nesneye dönüştür
+    for (const item of obj.profiles) {
+      if (item && typeof item === "object" && "name" in item && "ids" in item && Array.isArray((item as { ids: unknown }).ids)) {
+        profiles[(item as { name: string }).name] = (item as { ids: string[] }).ids;
+      }
+    }
+  }
+
+  // En az extensions veya profiles mevcut olmalı
+  if (!Array.isArray(obj.extensions) && (!obj.profiles || typeof obj.profiles !== "object")) {
     throw new Error("Corrupted backup: missing extensions or profiles list.");
   }
 
-  return parsed as BackupPayload;
+  const options: ExtendedOptions = (obj.options && typeof obj.options === "object")
+    ? (obj.options as ExtendedOptions)
+    : DEFAULT_OPTIONS;
+
+  return {
+    version: typeof obj.version === "number" ? obj.version : 1,
+    app: "ExtensityPlus-HaYTooL",
+    exportedAt: typeof obj.exportedAt === "string" ? obj.exportedAt : new Date().toISOString(),
+    sourceBrowser: typeof obj.sourceBrowser === "string" ? obj.sourceBrowser : "Unknown",
+    options,
+    profiles,
+    extensions,
+  };
 }
 
 /**

@@ -332,3 +332,43 @@ export async function fetchGistContent(
 
   return fileObj.content || "";
 }
+
+/**
+ * Gist kasasından belirli bir yedek slot dosyasını siler.
+ * GitHub REST API'de bir dosyayı silmek için PATCH isteğinde dosya adı null olarak gönderilir.
+ */
+export async function deleteBackupFromGist(
+  token: string,
+  gistId: string,
+  filename: string
+): Promise<GistVault> {
+  const payload = {
+    files: {
+      [filename]: null,
+    },
+  };
+
+  const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token.trim()}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to delete backup file '${filename}' from Gist: ${res.status}`);
+  }
+
+  const data = await res.json();
+  return {
+    id: data.id,
+    description: data.description,
+    htmlUrl: data.html_url,
+    updatedAt: data.updated_at,
+    files: normalizeGistFiles(data.files),
+  };
+}
