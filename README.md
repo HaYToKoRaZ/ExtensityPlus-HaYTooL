@@ -58,9 +58,12 @@
   <b>📸 Application Screenshots / Uygulama Ekran Görüntüleri</b>
 </p>
 <p align="center">
-  <img src="screenshots/1.jpeg" width="32%" alt="Options Page - Discord Theme & Languages" style="border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);" />
-  <img src="screenshots/2.jpeg" width="32%" alt="Profiles & Always-On Manager" style="border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);" />
-  <img src="screenshots/3.jpeg" width="32%" alt="Backup & Cloud Sync - GitHub Gist" style="border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);" />
+  <img src="screenshots/turkce-ayarlar.png" width="48%" alt="Extensity+ Ayarlar Sayfası (Türkçe)" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.45); margin: 4px;" />
+  <img src="screenshots/ingilizce-ayarlar.png" width="48%" alt="Extensity+ Settings Page (English)" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.45); margin: 4px;" />
+</p>
+<p align="center">
+  <img src="screenshots/2.jpeg" width="48%" alt="Profiles & Always-On Manager" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.45); margin: 4px;" />
+  <img src="screenshots/3.jpeg" width="48%" alt="Backup & Cloud Sync - GitHub Gist" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.45); margin: 4px;" />
 </p>
 
 ---
